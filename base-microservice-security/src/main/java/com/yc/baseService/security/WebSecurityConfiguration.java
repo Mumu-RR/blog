@@ -38,7 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override   //对于  hystrix的仪表盘，不做处理
     public void configure(WebSecurity web) throws Exception {
-        //   book是权限       user不要权限
+        //   book是权限       user不要权限 hhh
         //   不管是什么服务，只要是访问这个服务中的  "/actuator/hystrix.stream", "/turbine.stream",不用加权限验证
         web.ignoring().antMatchers("/actuator/hystrix.stream", "/turbine.stream");
     }
