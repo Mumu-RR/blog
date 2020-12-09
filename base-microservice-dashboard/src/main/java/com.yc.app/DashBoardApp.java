@@ -19,5 +19,6 @@ public class DashBoardApp {
     public String home() {
         return "forward:/hystrix";
     }
+    //gg
 
 }

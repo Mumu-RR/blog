@@ -14,7 +14,7 @@ public class BaseMicroserviceConfig1 {
 
         SpringApplication.run(BaseMicroserviceConfig1.class, args);
         //测试
-        //测试2
+
     }
 }
 
