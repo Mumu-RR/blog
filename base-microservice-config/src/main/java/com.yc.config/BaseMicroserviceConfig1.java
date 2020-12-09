@@ -13,6 +13,7 @@ public class BaseMicroserviceConfig1 {
     public static void main(String[] args) {
 
         SpringApplication.run(BaseMicroserviceConfig1.class, args);
+        //测试
     }
 }
 
