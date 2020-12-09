@@ -1,0 +1,27 @@
+GitHub使用
+第一次提交项目:
+
+echo "# mytomcat" >> README.md        —加入一个说明文件
+git init    
+git add 本地要添加的文件 
+git commit -m "first commit"
+git remote add origin https://github.com/zhangyingchengqi/mytomcat.git
+git push -u origin master
+
+
+第二次提交相同项目: 
+git add 本地文件名
+
+git commit -m “提交消息”             —提交到本地git
+git push -u origin master               —提交到远程
+
+
+
+从github上clone 项目，经过修改后再上传:
+2. 克隆:      git clone git://github.com/xxx/xx.git
+3. 分支的创建和合并    git branch local git checkout local              切换到local分支 
+4. 在local分支进行开发，开发完成后与master分支合并 git checkout master git merge local git branch -d local             合并完成后删除local                                 
+5. 添加新文件到库 一般选用以下命令    git add 文件名                                  git add *.txt 
+6. 提交修改 一般选用以下命令     git commit -m ‘信息’ -a         提交所有修改                                   git commit -m ‘信息’  文件名                                    git commit -C head -a —amend         不会产生提交历史记录
+7. 获取现在master的最新更改，再手工解决冲突  git pull
+9. 最后将修改的内容提交到github.  git push origin master
