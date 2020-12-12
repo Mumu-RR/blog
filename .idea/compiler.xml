@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="BUILD_PROCESS_HEAP_SIZE" value="128" />
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -9,9 +10,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-for-ha-config" />
         <module name="base-microservice-turbine" />
+        <module name="user-restapi" />
         <module name="base-microservice-security" />
         <module name="base-microservice-zuul" />
         <module name="base-microservice-config" />
+        <module name="blog-web" />
+        <module name="user-client-zuul" />
+        <module name="piclib-domain" />
         <module name="base-microservice-dashboard" />
       </profile>
     </annotationProcessing>
@@ -21,8 +26,12 @@
       <module name="base-microservice-security" target="1.8" />
       <module name="base-microservice-turbine" target="1.8" />
       <module name="base-microservice-zuul" target="1.8" />
+      <module name="blog-web" target="1.8" />
       <module name="eureka-for-ha-config" target="1.8" />
       <module name="myblog" target="1.8" />
+      <module name="piclib-domain" target="1.8" />
+      <module name="user-client-zuul" target="1.8" />
+      <module name="user-restapi" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

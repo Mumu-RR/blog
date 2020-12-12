@@ -10,6 +10,10 @@
         <module>base-microservice-dashboard</module>
         <module>base-microservice-turbine</module>
         <module>base-microservice-zuul</module>
+        <module>blog-domain</module>
+        <module>user-restapi</module>
+        <module>blog-web</module>
+        <module>user-client-zuul</module>
     </modules>
     <groupId>com.yc.Blog</groupId>
     <artifactId>myblog</artifactId>
