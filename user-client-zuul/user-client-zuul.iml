@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="Entities" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -121,7 +123,7 @@
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-core:10.4.0" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-slf4j:10.4.0" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-hystrix:10.4.0" level="project" />
-    <orderEntry type="module" module-name="blog-domain" />
+    <orderEntry type="module" module-name="piclib-domain" />
     <orderEntry type="library" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.21" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.31" level="project" />
     <orderEntry type="module-library">

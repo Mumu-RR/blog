@@ -18,7 +18,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 39.99.175.175
+          brokers: 116.62.27.53
 
   application:
     name: base-microservice-config
