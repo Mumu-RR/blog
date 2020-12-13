@@ -18,7 +18,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: a
-    url: jdbc:mysql://localhost:3306/testmis81?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong
+    url: jdbc:mysql://116.62.27.53:3306/C81-S3-Prl-blog?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong
   application:
     name: microservice-provider-piclib   #应用服务名
 mybatis:

@@ -7,10 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/base-microservice-security/base-microservice-security.iml" filepath="$PROJECT_DIR$/base-microservice-security/base-microservice-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/base-microservice-turbine/base-microservice-turbine.iml" filepath="$PROJECT_DIR$/base-microservice-turbine/base-microservice-turbine.iml" />
       <module fileurl="file://$PROJECT_DIR$/base-microservice-zuul/base-microservice-zuul.iml" filepath="$PROJECT_DIR$/base-microservice-zuul/base-microservice-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blog-domain/blog-domain.iml" filepath="$PROJECT_DIR$/blog-domain/blog-domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/blog-web/blog-web.iml" filepath="$PROJECT_DIR$/blog-web/blog-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-for-ha-config/eureka-for-ha-config.iml" filepath="$PROJECT_DIR$/eureka-for-ha-config/eureka-for-ha-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/myblog.iml" filepath="$PROJECT_DIR$/myblog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/blog-domain/piclib-domain.iml" filepath="$PROJECT_DIR$/blog-domain/piclib-domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-client-zuul/user-client-zuul.iml" filepath="$PROJECT_DIR$/user-client-zuul/user-client-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-restapi/user-restapi.iml" filepath="$PROJECT_DIR$/user-restapi/user-restapi.iml" />
     </modules>

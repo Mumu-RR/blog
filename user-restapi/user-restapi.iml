@@ -131,7 +131,7 @@
     <orderEntry type="library" name="Maven: net.logstash.logback:logstash-logback-encoder:4.10" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.6" level="project" />
-    <orderEntry type="module" module-name="piclib-domain" />
+    <orderEntry type="module" module-name="blog-domain" />
     <orderEntry type="library" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.21" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.31" level="project" />
     <orderEntry type="module-library">
