@@ -27,6 +27,27 @@ public class UserFuture {
         });
     }
 
+    @Async
+    public CompletableFuture<String> getQuestion(@RequestParam("account")String account){
+        return CompletableFuture.supplyAsync(() -> {
+            return userRestService.getQuestion(account);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> answer(@RequestParam("account")String account, @RequestParam("pwdAnswer")String pwdAnswer){
+        return CompletableFuture.supplyAsync(() -> {
+            return userRestService.answer(account, pwdAnswer);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> resetPwd(@RequestParam("account")String account,@RequestParam("pwd") String pwd){
+        return CompletableFuture.supplyAsync(() -> {
+            return userRestService.resetPwd(account, pwd);
+        });
+    }
+
 //    @Async
 //    public CompletableFuture<String> toregister(ModelAndView mav){
 //        return CompletableFuture.supplyAsync(() -> {

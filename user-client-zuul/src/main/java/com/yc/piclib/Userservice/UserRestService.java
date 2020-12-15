@@ -35,6 +35,19 @@ public class UserRestService {
         return userClient.register(user, errors,account,pwd,name,email);
     }
 
+    public String getQuestion(@RequestParam("account")String account){
+        return userClient.getQuestion(account);
+    }
+
+    public String answer(@RequestParam("account")String account, @RequestParam("pwdAnswer")String pwdAnswer){
+        return userClient.answer(account, pwdAnswer);
+    }
+
+    public String resetPwd(@RequestParam("account")String account,@RequestParam("pwd") String pwd){
+        System.out.println("resetpwdclient");
+        return userClient.resetPwd(account, pwd);
+    }
+
 //    private String findByIdFallback(Integer id) {
 //        Map map = new HashMap();
 //        map.put("code", "-1");

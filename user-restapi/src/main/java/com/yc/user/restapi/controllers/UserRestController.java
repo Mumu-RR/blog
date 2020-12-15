@@ -163,45 +163,61 @@ public class UserRestController {
 
     //获取问题
     @GetMapping("getQuestion")
-    public Result getQuestion(String account) {
-        if(account == null || account.trim().isEmpty()) {
-            return new Result(0,"用户名不能为空！");
-        }
-        User user = um.selectByAccount(account);
-        if(user==null) {
-            return new Result(0,"该用户不存在！");
-        }
-        return new Result(1,user.getPwdQuestion());
+    public CompletableFuture<String> getQuestion(@RequestParam("account")String account) {
+        return CompletableFuture.supplyAsync(() -> {
+            if (account == null || account.trim().isEmpty()) {
+                //return new Result(0, "用户名不能为空！");
+                return new Gson().toJson(new Result(0, "用户名不能为空！"));
+            }
+            User user = um.selectByAccount(account);
+            if (user == null) {
+                //return new Result(0, "该用户不存在！");
+                return new Gson().toJson(new Result(0, "该用户不存在！"));
+            }
+            //return new Result(1, user.getPwdQuestion());
+            return new Gson().toJson(new Result(1, user.getPwdQuestion()));
+        });
     }
 
 
     //判断答案
     @GetMapping("answer")
-    public Result answer(String account, String pwdAnswer) {
-        if(account == null || account.trim().isEmpty()) {
-            return new Result(0,"用户名不能为空!");
-        }
-        if(pwdAnswer == null || pwdAnswer.trim().isEmpty()) {
-            return new Result(0,"密码回答不能为空!");
-        }
-        User user = um.selectByAccountAndPwdAnswer(account,pwdAnswer);
-        if(user==null) {
-            return new Result(0,"问题回答不正确!");
-        }
-        return new Result(1,"问题回答正确!");
+    public CompletableFuture<String> answer(@RequestParam("account")String account, @RequestParam("pwdAnswer")String pwdAnswer) {
+        return CompletableFuture.supplyAsync(() -> {
+            if (account == null || account.trim().isEmpty()) {
+                //return new Result(0, "用户名不能为空!");
+                return new Gson().toJson(new Result(0, "用户名不能为空!"));
+            }
+            if (pwdAnswer == null || pwdAnswer.trim().isEmpty()) {
+                //return new Result(0, "密码回答不能为空!");
+                return new Gson().toJson(new Result(0, "密码回答不能为空!"));
+            }
+            User user = um.selectByAccountAndPwdAnswer(account, pwdAnswer);
+            if (user == null) {
+                //return new Result(0, "问题回答不正确!");
+                return new Gson().toJson(new Result(0, "问题回答不正确!"));
+            }
+            //return new Result(1, "问题回答正确!");
+            return new Gson().toJson(new Result(1, "问题回答正确!"));
+        });
     }
 
     //重置密码
-    @PostMapping("resetPwd")
-    public Result resetPwd(String account, String pwd) {
-        if(account == null || account.trim().isEmpty()) {
-            return new Result(0,"用户名不能为空!");
-        }
-        if(pwd == null || pwd.trim().isEmpty()) {
-            return new Result(0,"密码不能为空!");
-        }
-        um.resetPwd(account,MD5Utils.stringToMD5(pwd));
-        return new Result(1,"密码重置成功!");
+    @GetMapping("resetPwd")
+    public CompletableFuture<String> resetPwd(@RequestParam("account")String account,@RequestParam("pwd") String pwd) {
+        return CompletableFuture.supplyAsync(() -> {
+            if (account == null || account.trim().isEmpty()) {
+                //return new Result(0,"用户名不能为空!");
+                return new Gson().toJson(new Result(0, "用户名不能为空!"));
+            }
+            if (pwd == null || pwd.trim().isEmpty()) {
+                //return new Result(0,"密码不能为空!");
+                return new Gson().toJson(new Result(0, "密码不能为空!"));
+            }
+            um.resetPwd(account, MD5Utils.stringToMD5(pwd));
+            //return new Result(1,"密码重置成功!");
+            return new Gson().toJson(new Result(1, "密码重置成功!"));
+        });
     }
 
     //上传图片
