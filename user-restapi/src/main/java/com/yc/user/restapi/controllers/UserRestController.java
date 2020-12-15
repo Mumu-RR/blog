@@ -3,6 +3,7 @@ package com.yc.user.restapi.controllers;
 
 import com.google.gson.Gson;
 import com.yc.blog.Userservice.UserServiceImpl;
+import com.yc.blog.dao.impl.UserMapper;
 import com.yc.blog.entity.Result;
 import com.yc.blog.entity.User;
 import com.yc.blog.util.BizException;
@@ -11,13 +12,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +34,8 @@ public class UserRestController {
 
     @Autowired
     private UserServiceImpl userService;
+    @Resource
+    private UserMapper um;
 
     @RequestMapping(value = "/findAll")
     //  @HystrixCommand(fallbackMethod = "errorCallBack")   //模仿没有这个数据时，服务降级
@@ -90,32 +96,119 @@ public class UserRestController {
 
 
     @RequestMapping("register")
-    public ModelAndView register(@Valid User user, Errors errors, ModelAndView mav) {
-        //设置默认（成功）跳转的页面
-        //页面跳转行为：1、请求转发（默认） 2、响应重定向
-        mav.setViewName("redirect:index");
+    public int register(@Valid User user, Errors errors, @RequestParam("account")String account, @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email, HttpServletResponse response)throws IOException  {
 
-        //验证用户输入的信息
-        if(errors.hasErrors()) {
-            mav.addObject("errors",errors.getAllErrors());
-            mav.setViewName("register");
-            return mav;
-        }else {
-            try {
-                //md5加密
-                user.setPwd(MD5Utils.stringToMD5(user.getPwd()));
-                userService.register(user);
-            } catch (BizException e) {
-                e.printStackTrace();
-                errors.rejectValue("account", "AccountFailure",e.getMessage());
-                mav.addObject("errors",errors.getAllErrors());
-                mav.setViewName("register");
+            System.out.println("registt111111111111111");
+            System.out.println("restapi:" + user + "|" + errors + "|" + account + "|" + pwd + "|" + name + "|" + email);
+            //设置默认（成功）跳转的页面
+            //页面跳转行为：1、请求转发（默认） 2、响应重定向
+
+
+            //验证用户输入的信息
+            if (errors.hasErrors()) {
+                System.out.println("registt22222222222222");
+                //mav.setViewName("redirect:index");
+                try {
+                    response.sendRedirect("http://localhost:8095/register.html");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            } else {
+                try {
+                    //md5加密
+                    System.out.println("registt33333333333333333");
+                    user.setPwd(MD5Utils.stringToMD5(user.getPwd()));
+                    userService.register(user);
+                } catch (BizException e) {
+                    e.printStackTrace();
+                    errors.rejectValue("account", "AccountFailure", e.getMessage());
+//                    mav.addObject("errors", errors.getAllErrors());
+//                    mav.setViewName("register");
+                    try {
+                        response.sendRedirect("http://localhost:8095/register.html");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    return 0;
+                }
             }
-        }
-        //将用户对象传回页面，实现表单的回填
-        mav.addObject("user",user);
-        mav.addObject("errors",errors.getFieldErrors());
+            //将用户对象传回页面，实现表单的回填
+//            mav.addObject("user", user);
+//            mav.addObject("errors", errors.getFieldErrors());
 
+            try {
+                response.sendRedirect("http://localhost:8095/index.html");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        return 0;
+    }
+
+    //跳转到注册页面
+//    @GetMapping("/toreg")
+//    public void toregister( HttpServletResponse response) throws IOException {
+////            System.out.println("restapi:" + mav);
+////            mav.setViewName("redirect:/register");
+//           // return mav;
+//        response.sendRedirect("register.html");
+//    }
+
+    //找回密码页面
+    @GetMapping("forget.html")
+    public ModelAndView toforget(ModelAndView mav) {
+        mav.setViewName("forget");
         return mav;
+    }
+
+    //获取问题
+    @GetMapping("getQuestion")
+    public Result getQuestion(String account) {
+        if(account == null || account.trim().isEmpty()) {
+            return new Result(0,"用户名不能为空！");
+        }
+        User user = um.selectByAccount(account);
+        if(user==null) {
+            return new Result(0,"该用户不存在！");
+        }
+        return new Result(1,user.getPwdQuestion());
+    }
+
+
+    //判断答案
+    @GetMapping("answer")
+    public Result answer(String account, String pwdAnswer) {
+        if(account == null || account.trim().isEmpty()) {
+            return new Result(0,"用户名不能为空!");
+        }
+        if(pwdAnswer == null || pwdAnswer.trim().isEmpty()) {
+            return new Result(0,"密码回答不能为空!");
+        }
+        User user = um.selectByAccountAndPwdAnswer(account,pwdAnswer);
+        if(user==null) {
+            return new Result(0,"问题回答不正确!");
+        }
+        return new Result(1,"问题回答正确!");
+    }
+
+    //重置密码
+    @PostMapping("resetPwd")
+    public Result resetPwd(String account, String pwd) {
+        if(account == null || account.trim().isEmpty()) {
+            return new Result(0,"用户名不能为空!");
+        }
+        if(pwd == null || pwd.trim().isEmpty()) {
+            return new Result(0,"密码不能为空!");
+        }
+        um.resetPwd(account,MD5Utils.stringToMD5(pwd));
+        return new Result(1,"密码重置成功!");
+    }
+
+    //上传图片
+    @PostMapping("uploadImg")
+    public Result uploadImg(@RequestParam("img") MultipartFile file) throws IllegalStateException, IOException {
+        file.transferTo(new File("e:/cr_img/" + file.getOriginalFilename()));
+        //回传 图片的web地址
+        return new Result(1,"/imgs/"+file.getOriginalFilename());
     }
 }

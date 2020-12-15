@@ -23,6 +23,14 @@ public interface UserClient {
     String login(@RequestParam("user")User user, @RequestParam("errors") Errors errors,
                  @RequestParam("session") HttpSession session, @RequestParam("account")String account,@RequestParam("pwd")String pwd);
 
+//    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/register.html")
+//    String toregister(@RequestParam(value="mav",required = false) ModelAndView mav);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/register")
+    String register(@RequestParam("user") User user, @RequestParam("errors")Errors errors, @RequestParam("account")String account,
+                    @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email);
+
+
 //    @RequestMapping(method = RequestMethod.GET, value = "/yc-api/piclib-proxy/piclib/findAll",
 //            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
 //            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

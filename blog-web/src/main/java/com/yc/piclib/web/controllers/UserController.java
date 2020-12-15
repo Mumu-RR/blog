@@ -24,10 +24,22 @@ public class UserController {
     @Autowired
     private UserFuture userFuture;
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public CompletableFuture<String> login(@Valid User user, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
         System.out.println("web层"+user+"errors:"+errors);
         return userFuture.login(user,errors,session,account,pwd);
+    }
+
+//    @GetMapping("/toreg")
+//    public CompletableFuture<String> toregister( ModelAndView mav){
+//        System.out.println("web层"+mav);
+//        return userFuture.toregister(mav);
+//    }
+
+    @RequestMapping("/register")
+    public CompletableFuture<String> register(@Valid User user, Errors errors , @RequestParam("account")String account, @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email){
+        System.out.println("web层"+user+"|"+errors+"|"+account+"|"+pwd+"|"+name+"|"+email);
+        return userFuture.register(user,errors,account,pwd,name,email);
     }
 
 //    @RequestMapping(value = "/findAll", method = RequestMethod.POST)

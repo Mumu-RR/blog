@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 //Hystrix服务层:  调用 PiclibClient,实现断路器功能
 @Service
@@ -22,6 +23,16 @@ public class UserRestService {
         System.out.println(user+"3333333333");
         System.out.println(111111);
         return userClient.login(user, errors, session,account,pwd);
+    }
+
+//    public String toregister(ModelAndView mav){
+//        return userClient.toregister(mav);
+//    }
+
+    public String register(@Valid User user, Errors errors, @RequestParam("account")String account, @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email){
+        System.out.println("zuul"+user+"|"+errors+"|"+account+"|"+pwd+"|"+name+"|"+email);
+
+        return userClient.register(user, errors,account,pwd,name,email);
     }
 
 //    private String findByIdFallback(Integer id) {

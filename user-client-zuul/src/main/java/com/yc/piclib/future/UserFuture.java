@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 
 // 对外公开的业务层
@@ -23,6 +24,21 @@ public class UserFuture {
         return CompletableFuture.supplyAsync(() -> {
             System.out.println("zuulClient"+user+"errors:"+errors);
             return userRestService.login(user,errors,session,account,pwd);
+        });
+    }
+
+//    @Async
+//    public CompletableFuture<String> toregister(ModelAndView mav){
+//        return CompletableFuture.supplyAsync(() -> {
+//            System.out.println("zuulClient"+mav);
+//            return userRestService.toregister(mav);
+//        });
+//    }
+
+    @Async
+    public CompletableFuture<String> register(@Valid User user, Errors errors, @RequestParam("account")String account, @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email) {
+        return CompletableFuture.supplyAsync(() -> {
+            return userRestService.register(user, errors,account,pwd,name,email);
         });
     }
 
