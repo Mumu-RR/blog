@@ -8,16 +8,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="category-restapi" />
         <module name="eureka-for-ha-config" />
         <module name="base-microservice-turbine" />
         <module name="user-restapi" />
         <module name="base-microservice-security" />
-        <module name="base-microservice-zuul" />
+        <module name="comment-restapi" />
         <module name="base-microservice-config" />
         <module name="blog-web" />
         <module name="user-client-zuul" />
         <module name="blog-domain" />
         <module name="base-microservice-dashboard" />
+        <module name="base-microservice-zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +30,8 @@
       <module name="base-microservice-zuul" target="1.8" />
       <module name="blog-domain" target="1.8" />
       <module name="blog-web" target="1.8" />
+      <module name="category-restapi" target="1.8" />
+      <module name="comment-restapi" target="1.8" />
       <module name="eureka-for-ha-config" target="1.8" />
       <module name="myblog" target="1.8" />
       <module name="user-client-zuul" target="1.8" />

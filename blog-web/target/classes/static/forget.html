@@ -95,16 +95,19 @@
   				});
   			},
   			resetPwd(){
-  				var param = new URLSearchParams();
-  				param.append("account",this.account);
-  				param.append("pwd",this.pwd);
+  				//var param = new URLSearchParams();
+  				//param.append("account",this.account);
+  				//param.append("pwd",this.pwd);
   				//使用post请求发送敏感数据
-  				axios.post("resetPwd",param).then(res => {
+  				axios.get("resetPwd",{
+                  params:{account:this.account,
+                    pwd:this.pwd}
+                }).then(res => {
   					if(res.data.code == 0){
   						alert(res.data.msg);
   					}else{
   						//跳转到首页，并且打开登录窗口
-  						location.href = "index?login=1";
+  						location.href = "index.html";
   					}
   				});
   			}

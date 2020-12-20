@@ -110,7 +110,6 @@
         </div>
       </div>-->
       <div id="respond">
-        <form action="" method="post" id="comment-form">
           <div class="comment">
             <div class="comment-title"><img class="avatar" src="images/icon/icon.png" alt="" /></div>
             <div class="comment-box">
@@ -122,7 +121,6 @@
               </div>
             </div>
           </div>
-        </form>
       </div>
       <div id="postcomments">
         <ol class="commentlist">
@@ -150,15 +148,15 @@
   					content:""
   				}		// 当前提交的评论
   			},
-  		// 查询  事件钩子函数
-  		created(){
-  				axios.get("queryComm",{params:{
-  					articleid:aid
-  				}}).then(res =>{
-  				// res.data ==> Result ==> Result.data ==> List  ==> js 数组
-  					this.commList = res.data.data;
-  				})
-  			},
+          // 查询  事件钩子函数
+          created(){
+            axios.get("queryComm",{params:{
+                articleid:aid
+              }}).then(res =>{
+              // res.data ==> Result ==> Result.data ==> List  ==> js 数组
+              this.commList = res.data.data;
+            })
+          },
   			methods:{
   				reply(){
   					//发表评论
@@ -176,7 +174,7 @@
   							// 失败!
   							var msg = "";
   							for(var error of res.data.data){
-  								msg == error.defaultMessage+"\n"; // 查 json 格式
+  								msg = error.defaultMessage+"\n"; // 查 json 格式
   							}
   							alert(msg);
   						}

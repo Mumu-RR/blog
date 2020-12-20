@@ -77,7 +77,7 @@ CREATE TABLE `category` (
 INSERT INTO `category` VALUES ('1', '技术文章', null, '这是发表技术文章的地方, 欢迎大家常来看看');
 INSERT INTO `category` VALUES ('2', '程序人生', null, '这是发表程序人生的地方, 欢迎大家常来看看');
 INSERT INTO `category` VALUES ('3', '生活日记', null, '这是发表生活日记的地方, 欢迎大家常来看看');
-INSERT INTO `category` VALUES ('4', '\r\n工具推荐', null, '这是发表工具推荐的地方, 欢迎大家常来看看');
+INSERT INTO `category` VALUES ('4', '工具推荐', null, '这是发表工具推荐的地方, 欢迎大家常来看看');
 INSERT INTO `category` VALUES ('5', '综合文章', null, '这是发表综合文章的地方, 欢迎大家常来看看');
 
 -- ----------------------------
