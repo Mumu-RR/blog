@@ -4,6 +4,8 @@ import com.yc.blog.dao.impl.CommentMapper;
 import com.yc.blog.entity.Comment;
 import com.yc.blog.entity.Result;
 import com.yc.blog.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 public class CommentRestApiController {
+    private static Logger logger = LoggerFactory.getLogger(CommentRestApiController.class);
 
     @Resource
     private CommentMapper cm;

@@ -80,6 +80,12 @@
             <artifactId>user-client-zuul</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.yc.Blog</groupId>
+            <artifactId>category-client-zuul</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
 

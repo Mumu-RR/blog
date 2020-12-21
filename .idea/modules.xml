@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/base-microservice-zuul/base-microservice-zuul.iml" filepath="$PROJECT_DIR$/base-microservice-zuul/base-microservice-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/blog-domain/blog-domain.iml" filepath="$PROJECT_DIR$/blog-domain/blog-domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/blog-web/blog-web.iml" filepath="$PROJECT_DIR$/blog-web/blog-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/category-client-zuul/category-client-zuul.iml" filepath="$PROJECT_DIR$/category-client-zuul/category-client-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/category-restapi/category-restapi.iml" filepath="$PROJECT_DIR$/category-restapi/category-restapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/comment-restapi/comment-restapi.iml" filepath="$PROJECT_DIR$/comment-restapi/comment-restapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-for-ha-config/eureka-for-ha-config.iml" filepath="$PROJECT_DIR$/eureka-for-ha-config/eureka-for-ha-config.iml" />

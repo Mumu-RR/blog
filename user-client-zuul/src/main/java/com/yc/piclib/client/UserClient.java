@@ -19,34 +19,24 @@ import javax.servlet.http.HttpSession;
 public interface UserClient {
 
     //访问的路径value要修改成zuul指定的服务路由路径
-    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/login")
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/user-proxy/login")
     String login(@RequestParam("user")User user, @RequestParam("errors") Errors errors,
                  @RequestParam("session") HttpSession session, @RequestParam("account")String account,@RequestParam("pwd")String pwd);
 
-//    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/register.html")
-//    String toregister(@RequestParam(value="mav",required = false) ModelAndView mav);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/register")
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/user-proxy/register")
     String register(@RequestParam("user") User user, @RequestParam("errors")Errors errors, @RequestParam("account")String account,
                     @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/getQuestion")
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/user-proxy/getQuestion")
     String getQuestion( @RequestParam("account")String account);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/answer")
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/user-proxy/answer")
     String answer( @RequestParam("account")String account, @RequestParam("pwdAnswer")String pwdAnswer);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/piclib-proxy/resetPwd")
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/user-proxy/resetPwd")
     String resetPwd( @RequestParam("account")String account,@RequestParam("pwd") String pwd);
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/yc-api/piclib-proxy/piclib/findAll",
-//            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    String findAll(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize,
-//                   @RequestParam("description") String description);
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/yc-api/piclib-proxy/piclib/{id}")
-//    String delete(@RequestParam("id") Integer id);
 
 }
 

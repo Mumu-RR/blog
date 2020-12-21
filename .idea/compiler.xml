@@ -9,6 +9,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="category-restapi" />
+        <module name="category-client-zuul" />
         <module name="eureka-for-ha-config" />
         <module name="base-microservice-turbine" />
         <module name="user-restapi" />
@@ -30,6 +31,7 @@
       <module name="base-microservice-zuul" target="1.8" />
       <module name="blog-domain" target="1.8" />
       <module name="blog-web" target="1.8" />
+      <module name="category-client-zuul" target="1.8" />
       <module name="category-restapi" target="1.8" />
       <module name="comment-restapi" target="1.8" />
       <module name="eureka-for-ha-config" target="1.8" />

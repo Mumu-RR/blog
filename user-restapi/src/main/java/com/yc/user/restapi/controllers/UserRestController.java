@@ -40,20 +40,7 @@ public class UserRestController {
     @RequestMapping(value = "/findAll")
     //  @HystrixCommand(fallbackMethod = "errorCallBack")   //模仿没有这个数据时，服务降级
     public CompletableFuture<String> findAll() {
-        // static CompletableFuture<U> supplyAsync(Supplier<U> supplier)
-        //   Supplier就是一个接口
-        //    接口中的方法:   T get();
 
-//        return CompletableFuture.supplyAsync(new Supplier() {
-//            @Override
-//            public Object get() {  //回调方法,   当请求有响应，由  jvm 调用.
-//                  PicDomain pic = picService.findOne(id);
-        //            Map<String, Object> map = new HashMap<>();
-        //            map.put("code", 1);
-        //            map.put("data", pic);
-        //            return new Gson().toJson(map);
-//            }
-//        });
         //非阻塞式异步编程方法。因为在web ui的微服务对rest api的调用中将使用这种高并发的编程方法，所以为了保证与调用端保持同步，这里也使用这种方法.
         return CompletableFuture.supplyAsync(() -> {
            List<User> users =  userService.selectAll();
@@ -106,8 +93,6 @@ public class UserRestController {
 
             //验证用户输入的信息
             if (errors.hasErrors()) {
-                System.out.println("registt22222222222222");
-                //mav.setViewName("redirect:index");
                 try {
                     response.sendRedirect("http://localhost:8095/register.html");
                 } catch (IOException e) {
@@ -117,14 +102,11 @@ public class UserRestController {
             } else {
                 try {
                     //md5加密
-                    System.out.println("registt33333333333333333");
                     user.setPwd(MD5Utils.stringToMD5(user.getPwd()));
                     userService.register(user);
                 } catch (BizException e) {
                     e.printStackTrace();
                     errors.rejectValue("account", "AccountFailure", e.getMessage());
-//                    mav.addObject("errors", errors.getAllErrors());
-//                    mav.setViewName("register");
                     try {
                         response.sendRedirect("http://localhost:8095/register.html");
                     } catch (IOException ex) {
@@ -133,10 +115,6 @@ public class UserRestController {
                     return 0;
                 }
             }
-            //将用户对象传回页面，实现表单的回填
-//            mav.addObject("user", user);
-//            mav.addObject("errors", errors.getFieldErrors());
-
             try {
                 response.sendRedirect("http://localhost:8095/index.html");
             } catch (IOException e) {
@@ -145,14 +123,6 @@ public class UserRestController {
         return 0;
     }
 
-    //跳转到注册页面
-//    @GetMapping("/toreg")
-//    public void toregister( HttpServletResponse response) throws IOException {
-////            System.out.println("restapi:" + mav);
-////            mav.setViewName("redirect:/register");
-//           // return mav;
-//        response.sendRedirect("register.html");
-//    }
 
     //找回密码页面
     @GetMapping("forget.html")
