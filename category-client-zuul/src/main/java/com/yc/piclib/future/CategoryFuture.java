@@ -4,6 +4,7 @@ import com.yc.piclib.Categoryservice.CategoryRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,6 +18,13 @@ public class CategoryFuture {
     public CompletableFuture<String> findCategory() {
         return CompletableFuture.supplyAsync(() -> {
             return categoryRestService.findCategory();
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> getArticleByCategoryId(@RequestParam("id")int id){
+        return CompletableFuture.supplyAsync(() -> {
+            return categoryRestService.getArticleByCategoryId(id);
         });
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // feign客户端要访问的是  zuul服务 BASE-MICROSERVICE-ZUUL-GATEWAY
 @FeignClient(name = "BASE-MICROSERVICE-ZUUL-GATEWAY",
@@ -15,5 +16,8 @@ public interface CategoryClient {
 
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/category")
     String findCategory();
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/getArticleByCategoryId")
+    String getArticleByCategoryId(@RequestParam("id")int id);
 
 }

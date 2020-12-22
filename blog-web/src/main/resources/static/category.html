@@ -13,6 +13,8 @@
 <link rel="apple-touch-icon-precomposed" href="images/icon/icon.png">
 <link rel="shortcut icon" href="images/icon/favicon.ico">
 <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/vue.min.js"></script>
+  <script src="js/axios.min.js"></script>
 <script src="js/nprogress.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
 <!--[if gte IE 9]>
@@ -27,6 +29,7 @@
 </head>
 
 <body class="user-select">
+<div id="All">
 <header class="header">
   <nav class="navbar navbar-default" id="navbar">
     <div class="container">
@@ -51,11 +54,8 @@
       <div class="collapse navbar-collapse" id="header-navbar">
         <ul class="nav navbar-nav navbar-right">
           <li class="hidden-index active"><a data-cont="异清轩首页" href="index.html">异清轩首页</a></li>
-          <li><a href="category.html">前端技术</a></li>
-          <li><a href="category.html">后端程序</a></li>
-          <li><a href="category.html">管理系统</a></li>
-          <li><a href="category.html">授人以渔</a></li>
-          <li><a href="category.html">程序人生</a></li>
+          <li v-for="c in categorys"><a :href="'category.html?id='+c.id" v-text="c.name" >>前端技术</a></li>
+
         </ul>
         <form class="navbar-form visible-xs" action="/Search" method="post">
           <div class="input-group">
@@ -74,51 +74,16 @@
       <div class="title">
         <h3>后端程序</h3>
       </div>
-      <article class="excerpt excerpt-1"><a class="focus" href="article.html" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-        <header><a class="cat" href="program">后端程序<i></i></a>
-          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+      <article class="excerpt excerpt-1" v-for="a in article"><a class="focus" href="article.html" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
+        <header>
+          <h2><a :href="'article.html?id='+a.id" title="" v-text="a.title">php如何判断一个日期的格式是否正确</a></h2>
         </header>
         <p class="meta">
-          <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+          <time class="time"><i class="glyphicon glyphicon-time"></i> <span v-text="a.createtime">2016-1-4 10:29:39</span></time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共<span v-text="a.readcnt">120</span>人围观</span></span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
+        <p class="note" v-text="a.content.substring(0,50)">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
       </article>
-      <article class="excerpt excerpt-2"><a class="focus" href="article.html" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-        <header><a class="cat" href="program">后端程序<i></i></a>
-          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
-        </header>
-        <p class="meta">
-          <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-      </article>
-      <article class="excerpt excerpt-3"><a class="focus" href="article.html" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-        <header><a class="cat" href="program">后端程序<i></i></a>
-          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
-        </header>
-        <p class="meta">
-          <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-      </article>
-      <article class="excerpt excerpt-4"><a class="focus" href="article.html" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-        <header><a class="cat" href="program">后端程序<i></i></a>
-          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
-        </header>
-        <p class="meta">
-          <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-      </article>
-      <article class="excerpt excerpt-5"><a class="focus" href="article.html" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-        <header><a class="cat" href="program">后端程序<i></i></a>
-          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
-        </header>
-        <p class="meta">
-          <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-      </article>
+
       <nav class="pagination" style="display: none;">
         <ul>
           <li class="prev-page"></li>
@@ -207,8 +172,59 @@
     <li class="list-group-item"><span>浏览器：</span>Chrome47</li>
   </ul>
 </div>
+</div>
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.ias.js"></script> 
 <script src="js/scripts.js"></script>
+<script>
+  var cate = new Vue({
+    el:"#All",
+    data:{
+      categorys:{},
+      article:{},
+      id:''
+    },
+    methods: {
+      // getCategory: function () {
+      //   axios.get('category').then(result => {
+      //     this.categorys = result.data;
+      //   });
+      // },
+      // getArticleByCategoryId: function () {
+      //   var url = location.search; //获取url中"?"符后的字串
+      //   if (url.indexOf("?") != -1) {    //判断是否有参数
+      //     var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+      //     strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+      //     this.id = strs[1];
+      //     axios.get('getArticleByCategoryId?id=' + id).then(result => {
+      //       //this.article = result.data;
+      //       alert(id);
+      //     });
+      //   }
+      // }
+    },
+    mounted:function() {
+      axios.all([getCategory(),getArticleByCategoryId()])
+              .then(axios.spread((fn1,fn2)=>{
+                this.categorys = fn1.data;
+                this.article = fn2.data;
+              }));
+    }
+  });
+  function getArticleByCategoryId(){
+    var url = location.search; //获取url中"?"符后的字串
+    if (url.indexOf("?") != -1) {    //判断是否有参数
+      var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+      strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+      this.id = strs[1];
+      return axios.get('getArticleByCategoryId?id='+id);
+    }
+  }
+
+  function getCategory(){
+    return axios.get('category');
+  }
+
+</script>
 </body>
 </html>

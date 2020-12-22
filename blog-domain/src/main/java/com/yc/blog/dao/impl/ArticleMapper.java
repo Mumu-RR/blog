@@ -1,11 +1,10 @@
 package com.yc.blog.dao.impl;
 
-import java.util.List;
-
 import com.yc.blog.dao.MisBaseMapper;
-
 import com.yc.blog.entity.Article;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 
 @Mapper  //具体操作某张表的mapper
@@ -29,4 +28,7 @@ public interface ArticleMapper  extends MisBaseMapper<Article> {
 	//获取自增列主键值
 	@Options(useGeneratedKeys = true,keyColumn = "id",keyProperty = "id")
 	int insert(Article article);
+
+	@Select("select * from article where categoryId = #{id}")
+	List<Article> selectByCategoryId(int id);
 }
