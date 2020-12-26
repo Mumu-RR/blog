@@ -24,7 +24,7 @@ public class CategoryController {
     }
 
     @GetMapping("/getArticleByCategoryId")
-    public CompletableFuture<String> getArticle(@RequestParam("id")int id){
+    public CompletableFuture<String> getArticleByCategoryId(@RequestParam("id")int id){
         return categoryFuture.getArticleByCategoryId(id);
     }
 }

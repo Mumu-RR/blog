@@ -56,7 +56,7 @@ public class UserRestController {
     @RequestMapping("/login")
     public CompletableFuture<String> login(@Valid User user, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
         return CompletableFuture.supplyAsync(() -> {
-            System.out.println(account + "22222"+pwd);
+            System.out.println(session+"55555555");
             //用户输入验证
             if (errors.hasFieldErrors("account") || errors.hasFieldErrors("pwd")) {
                // return new Result(0, "字段验证错误", errors.getAllErrors());
@@ -66,7 +66,6 @@ public class UserRestController {
             //业务逻辑验证
             try {
                 //md5加密
-                System.out.println(user + "11111");
                 user.setPwd(MD5Utils.stringToMD5(user.getPwd()));
                 User dbuser = userService.login(user);
                 session.setAttribute("loginedUser", dbuser);
@@ -84,9 +83,6 @@ public class UserRestController {
 
     @RequestMapping("register")
     public int register(@Valid User user, Errors errors, @RequestParam("account")String account, @RequestParam("pwd")String pwd, @RequestParam("name")String name, @RequestParam("email")String email, HttpServletResponse response)throws IOException  {
-
-            System.out.println("registt111111111111111");
-            System.out.println("restapi:" + user + "|" + errors + "|" + account + "|" + pwd + "|" + name + "|" + email);
             //设置默认（成功）跳转的页面
             //页面跳转行为：1、请求转发（默认） 2、响应重定向
 

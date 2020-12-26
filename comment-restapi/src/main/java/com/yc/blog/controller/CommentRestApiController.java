@@ -1,5 +1,6 @@
 package com.yc.blog.controller;
 
+import com.google.gson.Gson;
 import com.yc.blog.dao.impl.CommentMapper;
 import com.yc.blog.entity.Comment;
 import com.yc.blog.entity.Result;
@@ -20,18 +21,18 @@ public class CommentRestApiController {
     private CommentMapper cm;
 
     @GetMapping("queryComm")
-    public Result selectByArticleId(int articleid) {
-        return new Result(1,"评论查询成功！",cm.selectByArticleid(articleid));
+    public String selectByArticleId(@RequestParam("id")int id) {
+        return new Gson().toJson(new Result(1,"评论查询成功！",cm.selectByArticleid(id)));
     }
 
-    @PostMapping("/reply.do")
-    public Result create(@Valid Comment comment, Errors errors, @SessionAttribute User loginedUser, @RequestParam("articleid")int articleid, @RequestParam("content")String content) {
+    @GetMapping("/reply.do")
+    public String create(@Valid Comment comment, Errors errors, @SessionAttribute User loginedUser, @RequestParam("id")int id, @RequestParam("content")String content) {
         System.out.println("reply.do111111111");
         if(errors.hasErrors()) {
-            return new Result(0,"评论验证错误！",errors.getAllErrors());
+            return new Gson().toJson(new Result(0,"评论验证错误！",errors.getAllErrors()));
         }
         comment.setCreateby(loginedUser.getId());
         cm.insert(comment);
-        return new Result(1,"评论发表成功！",comment);
+        return new Gson().toJson(new Result(1,"评论发表成功！",comment));
     }
 }

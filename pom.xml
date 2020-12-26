@@ -17,6 +17,9 @@
         <module>comment-restapi</module>
         <module>category-restapi</module>
         <module>category-client-zuul</module>
+        <module>article-restapi</module>
+        <module>article-client-zuul</module>
+        <module>comment-client-zuul</module>
     </modules>
     <groupId>com.yc.Blog</groupId>
     <artifactId>myblog</artifactId>

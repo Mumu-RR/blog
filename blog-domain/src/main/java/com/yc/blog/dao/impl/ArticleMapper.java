@@ -10,18 +10,21 @@ import java.util.List;
 @Mapper  //具体操作某张表的mapper
 public interface ArticleMapper  extends MisBaseMapper<Article> {
 
-	@Select("select * from article order by id desc")
-	@Results(
-		id="rmAct",
-		value={ @Result(  column = "categoryid", property = "category",
-					one = @One( select = "com.yc.C81S3Plyblog.dao.CategoryMapper.selectById") ) }
-	)
-	List<Article> selectNewArticle();
+//	@Select("select * from article order by id desc")
+//	@Results(
+//		id="rmAct",
+//		value={ @Result(  column = "categoryid", property = "category",
+//					one = @One( select = "com.yc.C81S3Plyblog.dao.CategoryMapper.selectById") ) }
+//	)
+//	List<Article> selectNewArticle();
 
 	
+//	@Select("select * from article where id = #{id}")
+//	//引用关联查询的配置
+//	@ResultMap("rmAct")
+//	Article selectById(int id);
+
 	@Select("select * from article where id = #{id}")
-	//引用关联查询的配置
-	@ResultMap("rmAct")
 	Article selectById(int id);
 
 	@Insert("insert into article values(null,#{author},#{title},#{content},null,null,#{categoryid},#{label},null,null,now(),0,0)")
@@ -31,4 +34,7 @@ public interface ArticleMapper  extends MisBaseMapper<Article> {
 
 	@Select("select * from article where categoryId = #{id}")
 	List<Article> selectByCategoryId(int id);
+
+	@Select("select * from article")
+	List<Article> selectAll();
 }

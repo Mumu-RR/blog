@@ -13,6 +13,8 @@
 <link rel="apple-touch-icon-precomposed" href="images/icon/icon.png">
 <link rel="shortcut icon" href="images/icon/favicon.ico">
 <script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/axios.min.js"></script>
 <script src="js/nprogress.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
 <!--[if gte IE 9]>
@@ -51,11 +53,8 @@
       <div class="collapse navbar-collapse" id="header-navbar">
         <ul class="nav navbar-nav navbar-right">
           <li class="hidden-index active"><a data-cont="异清轩首页" href="index.html">异清轩首页</a></li>
-          <li><a href="category.html">前端技术</a></li>
-          <li><a href="category.html">后端程序</a></li>
-          <li><a href="category.html">管理系统</a></li>
-          <li><a href="category.html">授人以渔</a></li>
-          <li><a href="category.html">程序人生</a></li>
+          <li v-for="c in categorys"><a :href="'category.html?id='+c.id" v-text="c.name" >>前端技术</a></li>
+
         </ul>
         <form class="navbar-form visible-xs" action="/Search" method="post">
           <div class="input-group">
@@ -72,7 +71,7 @@
   <div class="content-wrap">
     <div class="content">
       <header class="article-header">
-        <h1 class="article-title"><a href="article.html" th:text="${article.title}">php如何判断一个日期的格式是否正确</a></h1>
+        <h1 class="article-title"><a href="article.html" v-text="article.title">php如何判断一个日期的格式是否正确</a></h1>
         <div class="article-meta"> <span class="item article-meta-time">
           <time class="time" data-toggle="tooltip" data-placement="bottom" title="时间：2016-1-4 10:29:39"><i class="glyphicon glyphicon-time"></i> <span th:text="${article.createtime}">2016-1-4 10:29:39</span></time>
           </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：第一PHP社区"><i class="glyphicon glyphicon-globe"></i> 第一PHP社区</span> <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="栏目：后端程序"><i class="glyphicon glyphicon-list"></i> <a href="program" title="" th:text="${article.category.name}">后端程序</a></span> <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="查看：120"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="评论：0"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</span> </div>
@@ -81,7 +80,7 @@
       	<!-- 文章标题图片 -->
         <p><img data-original="images/banner/banner_03.jpg" src="images/banner/banner_03.jpg" alt="" /></p>
         <!-- 以下全部是文章的内容 -->
-        <div th:utext="${article.content}"></div>
+        <div v-html="article.content"></div>
       </article>
       <div class="article-tags">标签：<a href="" rel="tag">PHP</a></div>
       <div class="relates">
@@ -132,57 +131,70 @@
             </div>
           </li>
         </ol>
-        
+
         <div class="quotes"><span class="disabled">首页</span><span class="disabled">上一页</span><a class="current">1</a><a href="">2</a><span class="disabled">下一页</span><span class="disabled">尾页</span></div>
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-  		var aid = [[${param.id}]];// thymeleaf 在js 中获取对象语法
-  		var vue = new Vue({
-  			el:".content-wrap",
-  			data:{
-  				commList:[],	// 评论列表
-  				comment:{
-  					articleid:aid,
-  					content:""
-  				}		// 当前提交的评论
-  			},
-          // 查询  事件钩子函数
-          created(){
-            axios.get("queryComm",{params:{
-                articleid:aid
-              }}).then(res =>{
-              // res.data ==> Result ==> Result.data ==> List  ==> js 数组
-              this.commList = res.data.data;
-            })
-          },
-  			methods:{
-  				reply(){
-  					//发表评论
-  					var param = new URLSearchParams();
-  					param.append("articleid",this.comment.articleid);
-  					param.append("content",this.comment.content);
-  					axios.post("reply.do",param).then(res =>{
-  						if(res.data.code == 1){
-  							// 成功!
-  		  					// 将新的评论追加到评论列表中
-  		  					this.commList.push(res.data.data);
-  		  					// 清空输入框的内容;
-  		  					this.comment.content = "";
-  						}else{
-  							// 失败!
-  							var msg = "";
-  							for(var error of res.data.data){
-  								msg = error.defaultMessage+"\n"; // 查 json 格式
-  							}
-  							alert(msg);
-  						}
-  					})
-  				}
-  			}
-  		});
-  </script>
+
+<!--  <script type="text/javascript">-->
+<!--  		//var aid = [[${param.id}]];// thymeleaf 在js 中获取对象语法-->
+<!--  		var vue = new Vue({-->
+<!--  			el:".content-wrap",-->
+<!--  			data:{-->
+<!--  				commList:[],	// 评论列表-->
+<!--  				comment:{-->
+<!--  					id:'',// 当前提交的评论-->
+<!--  					content:''-->
+<!--  				},-->
+<!--                article:{},-->
+<!--                id:''-->
+<!--  			},-->
+<!--          // 查询  事件钩子函数-->
+<!--          created(){-->
+<!--            var url = location.search; //获取url中"?"符后的字串-->
+<!--            if (url.indexOf("?") != -1) {    //判断是否有参数-->
+<!--              var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串-->
+<!--              strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）-->
+<!--              var id = strs[1];-->
+<!--              axios.get("queryComm?id="+id).then(result => {-->
+<!--                // res.data ==> Result ==> Result.data ==> List  ==> js 数组-->
+<!--                this.commList = result.data.data;-->
+<!--              })-->
+<!--            }-->
+<!--          },-->
+<!--  			methods:{-->
+<!--  				reply() {-->
+<!--                  //发表评论-->
+<!--                  var url = location.search; //获取url中"?"符后的字串-->
+<!--                  if (url.indexOf("?") != -1) {    //判断是否有参数-->
+<!--                    var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串-->
+<!--                    strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）-->
+<!--                    var id = strs[1];-->
+<!--                  var param = new URLSearchParams();-->
+<!--                  param.append("id", id);-->
+<!--                  param.append("content", this.comment.content);-->
+<!--                  axios.post("reply.do", param).then(result => {-->
+<!--                    if (result.data.code == 1) {-->
+<!--                      // 成功!-->
+<!--                      // 将新的评论追加到评论列表中-->
+<!--                      this.commList.push(result.data.data);-->
+<!--                      // 清空输入框的内容;-->
+<!--                      this.comment.content = "";-->
+<!--                    } else {-->
+<!--                      // 失败!-->
+<!--                      var msg = "";-->
+<!--                      for (var error of res.data.data) {-->
+<!--                        msg = error.defaultMessage + "\n"; // 查 json 格式-->
+<!--                      }-->
+<!--                      alert(msg + "222222");-->
+<!--                    }-->
+<!--                  });-->
+<!--                }-->
+<!--  				}-->
+<!--  			},-->
+<!--  		});-->
+<!--  </script>-->
   <aside class="sidebar">
     <div class="fixed">
       <div class="widget widget-tabs">
@@ -289,18 +301,103 @@
     <li class="list-group-item"><span>浏览器：</span>Chrome47</li>
   </ul>
 </div>
+
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.ias.js"></script> 
 <script src="js/scripts.js"></script> 
 <script src="js/jquery.qqFace.js"></script> 
 <script type="text/javascript">
+  var cate = new Vue({
+    el:"#header-navbar",
+    data:{
+      categorys:{}
+    },
+    methods:{
+
+    },
+    mounted:function() {
+      axios.get('category').then(result=>{
+        this.categorys = result.data;
+      });
+    }
+  });
+
+  var article = new Vue({
+    el:".content-wrap",
+    data:{
+        article:{},
+        commList:[],	// 评论列表
+        comment:{
+            id:'',// 当前提交的评论
+            content:''
+        },
+        id:''
+    },
+      // 查询  事件钩子函数
+      created(){
+          var url = location.search; //获取url中"?"符后的字串
+          if (url.indexOf("?") != -1) {    //判断是否有参数
+              var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+              strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+              var id = strs[1];
+              axios.get("queryComm?id="+id).then(result => {
+                  // res.data ==> Result ==> Result.data ==> List  ==> js 数组
+                  this.commList = result.data.data;
+              })
+          }
+      },
+    methods:{
+        reply() {
+            //发表评论
+            var url = location.search; //获取url中"?"符后的字串
+            if (url.indexOf("?") != -1) {    //判断是否有参数
+                var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+                strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+                var id = strs[1];
+                var param = new URLSearchParams();
+                param.append("id", id);
+                param.append("content", this.comment.content);
+                axios.post("reply.do", param).then(result => {
+                    if (result.data.code == 1) {
+                        // 成功!
+                        // 将新的评论追加到评论列表中
+                        this.commList.push(result.data.data);
+                        // 清空输入框的内容;
+                        this.comment.content = "";
+                    } else {
+                        // 失败!
+                        var msg = "";
+                        for (var error of res.data.data) {
+                            msg = error.defaultMessage + "\n"; // 查 json 格式
+                        }
+                        alert(msg + "222222");
+                    }
+                });
+            }
+        }
+    },
+    mounted:function() {
+      var url = location.search; //获取url中"?"符后的字串
+      if (url.indexOf("?") != -1) {    //判断是否有参数
+        var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+        strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+        var id = strs[1];
+          axios.get('getArticleById?id='+id).then(result => {
+              this.article = result.data;
+          });
+      }
+
+    }
+  });
+
+
 $(function(){
 	$('.emotion').qqFace({
-		id : 'facebox', 
-		assign:'comment-textarea', 
+		id : 'facebox',
+		assign:'comment-textarea',
 		path:'/Home/images/arclist/'	//表情存放的路径
 	});
- });   
+ });
 </script>
 </body>
 </html>

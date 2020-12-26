@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/article-client-zuul/article-client-zuul.iml" filepath="$PROJECT_DIR$/article-client-zuul/article-client-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/article-restapi/article-restapi.iml" filepath="$PROJECT_DIR$/article-restapi/article-restapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/base-microservice-config/base-microservice-config.iml" filepath="$PROJECT_DIR$/base-microservice-config/base-microservice-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/base-microservice-dashboard/base-microservice-dashboard.iml" filepath="$PROJECT_DIR$/base-microservice-dashboard/base-microservice-dashboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/base-microservice-security/base-microservice-security.iml" filepath="$PROJECT_DIR$/base-microservice-security/base-microservice-security.iml" />
@@ -11,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/blog-web/blog-web.iml" filepath="$PROJECT_DIR$/blog-web/blog-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/category-client-zuul/category-client-zuul.iml" filepath="$PROJECT_DIR$/category-client-zuul/category-client-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/category-restapi/category-restapi.iml" filepath="$PROJECT_DIR$/category-restapi/category-restapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comment-client-zuul/comment-client-zuul.iml" filepath="$PROJECT_DIR$/comment-client-zuul/comment-client-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/comment-restapi/comment-restapi.iml" filepath="$PROJECT_DIR$/comment-restapi/comment-restapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-for-ha-config/eureka-for-ha-config.iml" filepath="$PROJECT_DIR$/eureka-for-ha-config/eureka-for-ha-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/myblog.iml" filepath="$PROJECT_DIR$/myblog.iml" />
