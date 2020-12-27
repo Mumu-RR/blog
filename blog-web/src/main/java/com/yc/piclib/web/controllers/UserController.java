@@ -2,6 +2,7 @@ package com.yc.piclib.web.controllers;
 
 
 import com.google.gson.Gson;
+import com.yc.blog.dao.impl.UserMapper;
 import com.yc.blog.entity.User;
 import com.yc.piclib.future.UserFuture;
 import org.slf4j.Logger;
@@ -29,9 +30,12 @@ public class UserController {
     @Autowired
     private UserFuture userFuture;
 
+    @Autowired(required = false)
+    private UserMapper um;
+
     @RequestMapping("/login")
     public CompletableFuture<String> login(@Valid User user, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
-        //System.out.println("web层"+user+"errors:"+errors);
+       // System.out.println("web层"+user+"errors:"+errors);;
         session.setAttribute("loginedUser", user);
         System.out.println(session.getAttribute("loginedUser")+"这是session");
         return userFuture.login(user,errors,session,account,pwd);

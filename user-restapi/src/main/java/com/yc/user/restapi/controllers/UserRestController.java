@@ -56,7 +56,6 @@ public class UserRestController {
     @RequestMapping("/login")
     public CompletableFuture<String> login(@Valid User user, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
         return CompletableFuture.supplyAsync(() -> {
-            System.out.println(session+"55555555");
             //用户输入验证
             if (errors.hasFieldErrors("account") || errors.hasFieldErrors("pwd")) {
                // return new Result(0, "字段验证错误", errors.getAllErrors());
@@ -68,7 +67,6 @@ public class UserRestController {
                 //md5加密
                 user.setPwd(MD5Utils.stringToMD5(user.getPwd()));
                 User dbuser = userService.login(user);
-                System.out.println(session.getAttribute("loginedUser")+"这是session");
                 //session.setAttribute("loginedUser", dbuser);
                // return new Result(1, "登录成功！");
                 return new Gson().toJson(new Result(1, "登录成功！"));

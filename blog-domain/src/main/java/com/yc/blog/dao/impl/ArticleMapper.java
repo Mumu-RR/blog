@@ -35,6 +35,6 @@ public interface ArticleMapper  extends MisBaseMapper<Article> {
 	@Select("select * from article where categoryId = #{id}")
 	List<Article> selectByCategoryId(int id);
 
-	@Select("select * from article")
+	@Select("select * from article order by createTime desc")
 	List<Article> selectAll();
 }

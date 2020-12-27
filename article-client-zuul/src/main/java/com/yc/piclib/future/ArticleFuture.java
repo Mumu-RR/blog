@@ -27,4 +27,13 @@ public class ArticleFuture {
             return articleRestService.selectAll();
         });
     }
+
+    @Async
+    public CompletableFuture<String> addArticle(@RequestParam("account")String account, @RequestParam("title")String title,
+                                                @RequestParam("categoryid")int categoryid, @RequestParam("label")String label,
+                                                @RequestParam("content")String content){
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.addArticle(account,title,categoryid,label,content);
+        });
+    }
 }

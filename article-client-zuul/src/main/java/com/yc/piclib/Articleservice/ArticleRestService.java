@@ -18,4 +18,11 @@ public class ArticleRestService {
     public String selectAll(){
         return articleClient.selectAll();
     }
+
+    public String addArticle(@RequestParam("account")String account, @RequestParam("title")String title,
+                             @RequestParam("categoryid")int categoryid, @RequestParam("label")String label,
+                             @RequestParam("content")String content){
+        System.out.println("zuul:"+account+"|"+title+"|"+categoryid+"|"+label+"|"+content);
+        return articleClient.addArticle(account,title,categoryid,label,content);
+    }
 }

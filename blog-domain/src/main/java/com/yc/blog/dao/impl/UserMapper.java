@@ -29,4 +29,5 @@ public interface UserMapper extends MisBaseMapper<User> {
 	
 	@Update("update user set pwd=#{pwd} where account=#{account}")
 	void resetPwd(@Param("account") String account, @Param("pwd") String pwd);
+
 }

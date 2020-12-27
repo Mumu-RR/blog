@@ -19,4 +19,9 @@ public interface ArticleClient {
 
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/selectAll")
     String selectAll();
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/addArticle")
+    String addArticle( @RequestParam("account")String account, @RequestParam("title")String title,
+                      @RequestParam("categoryid")int categoryid, @RequestParam("label")String label,
+                      @RequestParam("content")String content);
 }
