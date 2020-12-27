@@ -68,7 +68,8 @@ public class UserRestController {
                 //md5加密
                 user.setPwd(MD5Utils.stringToMD5(user.getPwd()));
                 User dbuser = userService.login(user);
-                session.setAttribute("loginedUser", dbuser);
+                System.out.println(session.getAttribute("loginedUser")+"这是session");
+                //session.setAttribute("loginedUser", dbuser);
                // return new Result(1, "登录成功！");
                 return new Gson().toJson(new Result(1, "登录成功！"));
             } catch (BizException e) {

@@ -47,16 +47,16 @@
     	<input name="title" /><br/>
     	分类：<br/>
     	<select name="categoryid" >
-    		<option th:each=" c : ${clist}"  th:value="${c.id}" th:text="${c.name}"></option>
+    		<option v-for=" c in categorys"  :value="c.id" v-text="c.name"></option>
     	</select>
     	<br/>
     	标签：<br/>
     	<input name="label" /><br/>
     	内容：<br/>
     	<textarea name="content" id="content" rows="" cols=""></textarea>
-    	<script>
-    		CKEDITOR.replace('content');
-    	</script>
+<!--    	<script>-->
+<!--    		CKEDITOR.replace('content');-->
+<!--    	</script>-->
     	<button>发表</button>
     </form>
   </div>
@@ -222,6 +222,22 @@
       			}
       		}
       	});
+
+        var cate = new Vue({
+          el:".content-wrap",
+          data:{
+            categorys:{}
+          },
+          methods:{
+
+          },
+          mounted:function() {
+            axios.get('category').then(result=>{
+              this.categorys = result.data;
+              CKEDITOR.replace('content');
+            });
+          }
+        });
       </script>
     
   </div>

@@ -46,11 +46,10 @@
             </ul>
           </li>
         </ul>
-        <a th:if="${session.loginedUser==null}" id="loginBtn" data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;
-        <a th:if="${session.loginedUser!=null}" class="login" rel="nofollow" th:text="'欢迎 '+${session.loginedUser.name}">欢迎xxxx</a>&nbsp;&nbsp;
+        <a  id="loginBtn" data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;
         <a href="register.html" class="register" rel="nofollow">我要注册</a>&nbsp;&nbsp;
         <a href="forget.html" rel="nofollow">找回密码</a>&nbsp;&nbsp;
-        <a href="toAddArticle" rel="nofollow">发表文章</a>
+        <a href="AddArticle.html" rel="nofollow">发表文章</a>
         </div>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -292,7 +291,17 @@
       					}
       				});
       			}
-      		}
+      		},
+          mounted:function(){
+            axios.get('doCheck').then(result=>{
+              console.log(result.data);
+              if(result.data){
+                $('#loginform').modal("hide");
+                loginBtn.innerText = "欢迎:"+result.data.user.account;
+                loginModal.id = "清空模态窗口的id，让按钮找不到窗口";
+              }
+            });
+          }
       	});
 
         var cate = new Vue({

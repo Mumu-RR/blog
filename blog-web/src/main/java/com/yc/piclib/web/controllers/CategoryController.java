@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -24,7 +25,8 @@ public class CategoryController {
     }
 
     @GetMapping("/getArticleByCategoryId")
-    public CompletableFuture<String> getArticleByCategoryId(@RequestParam("id")int id){
+    public CompletableFuture<String> getArticleByCategoryId(@RequestParam("id")int id, HttpSession session){
+        System.out.println(session.getAttribute("loginedUser")+"这是session");
         return categoryFuture.getArticleByCategoryId(id);
     }
 }

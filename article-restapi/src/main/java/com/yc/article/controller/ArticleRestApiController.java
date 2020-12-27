@@ -35,5 +35,10 @@ public class ArticleRestApiController {
         return new Gson().toJson(articleList);
     }
 
+    @RequestMapping("/addArticle")
+    public String addArticle(@RequestParam("title")String titlt,@RequestParam("categoryid")int categoryid,@RequestParam("label")String label,@RequestParam("content")String content){
+        return null;
+    }
+
 
 }

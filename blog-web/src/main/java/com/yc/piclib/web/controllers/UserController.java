@@ -1,16 +1,23 @@
 package com.yc.piclib.web.controllers;
 
 
+import com.google.gson.Gson;
 import com.yc.blog.entity.User;
 import com.yc.piclib.future.UserFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -24,8 +31,18 @@ public class UserController {
 
     @RequestMapping("/login")
     public CompletableFuture<String> login(@Valid User user, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
-        System.out.println("web层"+user+"errors:"+errors);
+        //System.out.println("web层"+user+"errors:"+errors);
+        session.setAttribute("loginedUser", user);
+        System.out.println(session.getAttribute("loginedUser")+"这是session");
         return userFuture.login(user,errors,session,account,pwd);
+    }
+
+    @RequestMapping("/doCheck")
+    public String doCheck(HttpSession session) throws IOException {
+        User user=(User)session.getAttribute("loginedUser");
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("user", user);
+        return new Gson().toJson(map);
     }
 
 //    @GetMapping("/toreg")
