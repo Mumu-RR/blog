@@ -19,6 +19,7 @@
         <module name="base-microservice-security" />
         <module name="article-client-zuul" />
         <module name="user-restapi" />
+        <module name="blog-admin" />
         <module name="base-microservice-config" />
         <module name="comment-restapi" />
         <module name="category-client-zuul" />
@@ -34,6 +35,7 @@
       <module name="base-microservice-security" target="1.8" />
       <module name="base-microservice-turbine" target="1.8" />
       <module name="base-microservice-zuul" target="1.8" />
+      <module name="blog-admin" target="1.8" />
       <module name="blog-domain" target="1.8" />
       <module name="blog-web" target="1.8" />
       <module name="category-client-zuul" target="1.8" />

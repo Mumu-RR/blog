@@ -20,6 +20,7 @@
         <module>article-restapi</module>
         <module>article-client-zuul</module>
         <module>comment-client-zuul</module>
+        <module>blog-admin</module>
     </modules>
     <groupId>com.yc.Blog</groupId>
     <artifactId>myblog</artifactId>
