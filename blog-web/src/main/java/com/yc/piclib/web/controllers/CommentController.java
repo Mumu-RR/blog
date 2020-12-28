@@ -1,15 +1,16 @@
 package com.yc.piclib.web.controllers;
 
-import com.yc.blog.entity.Comment;
 import com.yc.blog.entity.User;
 import com.yc.piclib.future.CommentFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -24,9 +25,11 @@ public class CommentController {
         return commentFuture.selectByArticleId(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/reply.do")
-    public CompletableFuture<String> create(@Valid Comment comment, Errors errors, @SessionAttribute User loginedUser, @RequestParam("id")int id, @RequestParam("content")String content){
-        System.out.println("web层："+comment+"||"+errors+"||"+loginedUser+"||"+id+"||"+content);
-        return commentFuture.create(comment,errors,loginedUser,id,content);
+    @RequestMapping("/reply.do")
+    public CompletableFuture<String> create(HttpSession session,  @RequestParam("id")int id, @RequestParam("content")String content){
+        System.out.println("web层："+id+"||"+content);
+        User user=(User)session.getAttribute("loginedUser");
+        String account = user.getAccount();
+        return commentFuture.create(account,id,content);
     }
 }

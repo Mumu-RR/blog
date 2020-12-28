@@ -1,15 +1,14 @@
 package com.yc.blog.entity;
 
-import java.sql.Timestamp;
+import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-
-import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+import java.sql.Timestamp;
 
 @Data      //  lombok 注解，节省getter, setter
 @Table(name = "comment")
@@ -23,7 +22,8 @@ public class Comment{
 	private String content;
 	private Integer createby;
 	private Timestamp createtime;
-	
+	private String name;
+
 	private Article article; // 关联文章   一对一管理
 	private User user; 		 // 发表人, 关联 User  一对一管理
 	

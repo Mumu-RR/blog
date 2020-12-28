@@ -128,7 +128,7 @@
           <li v-for="c in commList" class="comment-content"><span class="comment-f">#1</span>
             <div class="comment-avatar"><img class="avatar" src="images/icon/icon.png" alt="" /></div>
             <div class="comment-main">
-              <p>来自<span class="address">河南郑州</span>的{{c.createby}}<span class="time">{{c.createtime}}</span><br />
+              <p>网友<span class="address">{{c.name}}</span><span class="time">{{c.createtime}}</span><br />
                 {{c.content}}</p>
             </div>
           </li>
@@ -357,6 +357,7 @@
               axios.get("queryComm?id="+id).then(result => {
                   // res.data ==> Result ==> Result.data ==> List  ==> js 数组
                   this.commList = result.data.data;
+                  console.log(result.data.data);
               })
           }
       },
@@ -384,7 +385,7 @@
                         for (var error of res.data.data) {
                             msg = error.defaultMessage + "\n"; // 查 json 格式
                         }
-                        alert(msg + "222222");
+                        alert(msg);
                     }
                 });
             }
