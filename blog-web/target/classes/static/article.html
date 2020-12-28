@@ -128,7 +128,7 @@
           <li v-for="c in commList" class="comment-content"><span class="comment-f">#1</span>
             <div class="comment-avatar"><img class="avatar" src="images/icon/icon.png" alt="" /></div>
             <div class="comment-main">
-              <p>来自<span class="address">河南郑州</span>的{{c.createby}}<span class="time">{{c.createtime}}</span><br />
+              <p>网友<span class="address">{{c.name}}</span><span class="time">{{c.createtime}}</span><br />
                 {{c.content}}</p>
             </div>
           </li>
@@ -247,14 +247,10 @@
           别让你不能做的事妨碍到你能做的事。（John Wooden）</p>
       </div>
     </div>
-    <div class="widget widget_hot">
+    <div class="widget widget_hot" id="hotArticle">
       <h3>热门文章</h3>
       <ul>
-        <li><a href=""><span class="thumbnail"><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></span><span class="text">php如何判断一个日期的格式是否正确</span><span class="muted"><i class="glyphicon glyphicon-time"></i> 2016-1-4 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>
-        <li><a href=""><span class="thumbnail"><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></span><span class="text">php如何判断一个日期的格式是否正确</span><span class="muted"><i class="glyphicon glyphicon-time"></i> 2016-1-4 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>
-        <li><a href=""><span class="thumbnail"><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></span><span class="text">php如何判断一个日期的格式是否正确</span><span class="muted"><i class="glyphicon glyphicon-time"></i> 2016-1-4 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>
-        <li><a href=""><span class="thumbnail"><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></span><span class="text">php如何判断一个日期的格式是否正确</span><span class="muted"><i class="glyphicon glyphicon-time"></i> 2016-1-4 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>
-        <li><a href=""><span class="thumbnail"><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></span><span class="text">php如何判断一个日期的格式是否正确</span><span class="muted"><i class="glyphicon glyphicon-time"></i> 2016-1-4 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>
+        <li v-for="h in hotArticles"><a :href="'article.html?id='+h.id"><span class="thumbnail"><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></span><span v-text="h.title">php如何判断一个日期的格式是否正确</span><span  class="muted"><i class="glyphicon glyphicon-time"></i> {{h.createtime}} </span><span  class="muted"><i class="glyphicon glyphicon-eye-open"></i> {{h.readcnt}}</span></a></li>
       </ul>
     </div>
   </aside>
@@ -357,6 +353,7 @@
               axios.get("queryComm?id="+id).then(result => {
                   // res.data ==> Result ==> Result.data ==> List  ==> js 数组
                   this.commList = result.data.data;
+                  console.log(result.data.data);
               })
           }
       },
@@ -384,7 +381,7 @@
                         for (var error of res.data.data) {
                             msg = error.defaultMessage + "\n"; // 查 json 格式
                         }
-                        alert(msg + "222222");
+                        alert(msg);
                     }
                 });
             }
@@ -401,6 +398,21 @@
           });
       }
 
+    }
+  });
+
+  var hotArticle = new Vue({
+    el:"#hotArticle",
+    data:{
+      hotArticles:{}
+    },
+    methods:{
+
+    },
+    mounted:function() {
+      axios.get('hotArticle').then(result=>{
+        this.hotArticles = result.data;
+      });
     }
   });
 

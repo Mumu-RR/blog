@@ -39,4 +39,9 @@ public class ArticleController {
         System.out.println("web:"+account+"|"+title+"|"+categoryid+"|"+label+"|"+content);
         return articleFuture.addArticle(account,title,categoryid,label,content);
     }
+
+    @GetMapping("/hotArticle")
+    public CompletableFuture<String> hotArticle(){
+        return articleFuture.hotArticle();
+    }
 }

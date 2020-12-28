@@ -63,5 +63,9 @@ public class ArticleRestApiController {
         }
     }
 
-
+    @RequestMapping("/hotArticle")
+    public String hotArticle(){
+        List<Article> articleList = am.hotArticle();
+        return new Gson().toJson(articleList);
+    }
 }

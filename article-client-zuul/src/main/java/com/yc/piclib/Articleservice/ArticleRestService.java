@@ -25,4 +25,8 @@ public class ArticleRestService {
         System.out.println("zuul:"+account+"|"+title+"|"+categoryid+"|"+label+"|"+content);
         return articleClient.addArticle(account,title,categoryid,label,content);
     }
+
+    public String hotArticle(){
+        return articleClient.hotArticle();
+    }
 }

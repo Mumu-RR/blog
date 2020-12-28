@@ -36,4 +36,11 @@ public class ArticleFuture {
             return articleRestService.addArticle(account,title,categoryid,label,content);
         });
     }
+
+    @Async
+    public CompletableFuture<String> hotArticle(){
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.hotArticle();
+        });
+    }
 }

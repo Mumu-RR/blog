@@ -24,4 +24,7 @@ public interface ArticleClient {
     String addArticle( @RequestParam("account")String account, @RequestParam("title")String title,
                       @RequestParam("categoryid")int categoryid, @RequestParam("label")String label,
                       @RequestParam("content")String content);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/hotArticle")
+    String hotArticle();
 }
