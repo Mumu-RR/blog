@@ -15,7 +15,12 @@ public class ArticleRestService {
         return articleClient.getArticleById(id);
     }
 
+    public String selectEight(){
+        return articleClient.selectEight();
+    }
+
     public String selectAll(){
+        System.out.println("web:selectAll");
         return articleClient.selectAll();
     }
 
@@ -28,5 +33,14 @@ public class ArticleRestService {
 
     public String hotArticle(){
         return articleClient.hotArticle();
+    }
+
+    public String deleteArticleById(@RequestParam("id")int id){
+        return articleClient.deleteArticleById(id);
+    }
+
+    public String addNewNotice(@RequestParam("title")String title, @RequestParam("content")String content,@RequestParam("label") String label) {
+        System.out.println(title+"||"+content+"||"+label);
+        return  articleClient.addNewNotice(title,content,label);
     }
 }

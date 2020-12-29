@@ -2,8 +2,10 @@ package com.yc.article.controller;
 
 import com.google.gson.Gson;
 import com.yc.blog.dao.impl.ArticleMapper;
+import com.yc.blog.dao.impl.NoticeMapper;
 import com.yc.blog.dao.impl.UserMapper;
 import com.yc.blog.entity.Article;
+import com.yc.blog.entity.Notice;
 import com.yc.blog.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +31,19 @@ public class ArticleRestApiController {
     @Resource
     private UserMapper um;
 
+    @Resource
+    private NoticeMapper nm;
+
     @GetMapping("/getArticleById")
     public String getArticleById(@RequestParam("id")int id){
         Article article = am.selectById(id);
         return new Gson().toJson(article);
+    }
+
+    @GetMapping("/selectEight")
+    public String selectEight(){
+        List<Article> articleList = am.selectEight();
+        return new Gson().toJson(articleList);
     }
 
     @GetMapping("/selectAll")
@@ -67,5 +78,30 @@ public class ArticleRestApiController {
     public String hotArticle(){
         List<Article> articleList = am.hotArticle();
         return new Gson().toJson(articleList);
+    }
+
+    @GetMapping("/deleteArticleById")
+    public void deleteArticleById(@RequestParam("id")int id){
+        am.deleteArticleById(id);
+    }
+
+
+
+
+
+    //Notice
+    @GetMapping("/addNewNotice")
+    public void addNewNotice(@RequestParam("title")String title, @RequestParam("content")String content
+            ,@RequestParam("label") String label,HttpServletResponse response){
+        Notice notice = new Notice();
+        notice.setTitle(title);
+        notice.setContent(content);
+        notice.setLabel(label);
+        nm.addNewNotice(notice);
+        try {
+            response.sendRedirect("http://localhost:8090/notice.html");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

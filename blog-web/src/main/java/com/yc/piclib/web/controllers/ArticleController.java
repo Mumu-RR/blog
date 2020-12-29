@@ -25,9 +25,9 @@ public class ArticleController {
         return articleFuture.getArticleById(id);
     }
 
-    @GetMapping("/selectAll")
-    public CompletableFuture<String> selectAll(){
-        return articleFuture.selectAll();
+    @GetMapping("/selectEight")
+    public CompletableFuture<String> selectEight(){
+        return articleFuture.selectEight();
     }
 
     @RequestMapping("/addArticle")

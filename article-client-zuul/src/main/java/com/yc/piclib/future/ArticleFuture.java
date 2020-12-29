@@ -22,6 +22,13 @@ public class ArticleFuture {
     }
 
     @Async
+    public CompletableFuture<String> selectEight(){
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.selectEight();
+        });
+    }
+
+    @Async
     public CompletableFuture<String> selectAll(){
         return CompletableFuture.supplyAsync(() -> {
             return articleRestService.selectAll();
@@ -41,6 +48,20 @@ public class ArticleFuture {
     public CompletableFuture<String> hotArticle(){
         return CompletableFuture.supplyAsync(() -> {
             return articleRestService.hotArticle();
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> deleteArticleById(@RequestParam("id")int id){
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.deleteArticleById(id);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> addNewNotice(@RequestParam("title")String title,@RequestParam("content") String content, @RequestParam("label")String label) {
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.addNewNotice(title,content,label);
         });
     }
 }

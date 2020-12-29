@@ -36,8 +36,16 @@ public interface ArticleMapper  extends MisBaseMapper<Article> {
 	List<Article> selectByCategoryId(int id);
 
 	@Select("select * from article order by createTime desc LIMIT 8 OFFSET 1")
+	List<Article> selectEight();
+
+	@Select("select a.*,c.name as categoryName from article a,category c where a.categoryId = c.id order by a.createTime desc")
 	List<Article> selectAll();
 
 	@Select("select * from article order by readCnt+agreeCnt desc LIMIT 5 OFFSET 1")
 	List<Article> hotArticle();
+
+	@Delete("delete from article where id = #{id}")
+	void deleteArticleById(int id);
+
+
 }

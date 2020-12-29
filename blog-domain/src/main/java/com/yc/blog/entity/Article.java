@@ -1,6 +1,7 @@
 package com.yc.blog.entity;
 
-import java.sql.Timestamp;
+import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,9 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-
-import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+import java.sql.Timestamp;
 
 @Data      //  lombok 注解，节省getter, setter
 @Table(name = "article")
@@ -40,6 +39,7 @@ public class Article{
 	 * 	所属分类对象
 	 */
 	private Category category;
+	private String categoryName;
 	
 
 	

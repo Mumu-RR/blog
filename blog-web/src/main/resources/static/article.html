@@ -372,7 +372,7 @@
                     if (result.data.code == 1) {
                         // 成功!
                         // 将新的评论追加到评论列表中
-                        this.commList.push(result.data.data);
+                        this.commList.unshift(result.data.data);
                         // 清空输入框的内容;
                         this.comment.content = "";
                     } else {
