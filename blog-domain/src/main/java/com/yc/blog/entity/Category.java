@@ -16,6 +16,7 @@ public class Category{
 	private String name;
 	private String sort;
 	private String introduce;
+	private Integer num;
 
 	
 	

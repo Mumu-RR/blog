@@ -34,6 +34,17 @@ public interface ArticleClient {
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/deleteArticleById")
     String deleteArticleById(@RequestParam("id")int id);
 
+
+
+
+
+
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/addNewNotice")
     String addNewNotice(@RequestParam("title")String title, @RequestParam("content")String content,@RequestParam("label") String label);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/getNotice")
+    String getNotice();
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/article-proxy/deleteNoticeById")
+    String deleteNoticeById(@RequestParam("id")int id);
 }

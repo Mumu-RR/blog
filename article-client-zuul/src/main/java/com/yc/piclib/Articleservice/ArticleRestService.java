@@ -20,7 +20,6 @@ public class ArticleRestService {
     }
 
     public String selectAll(){
-        System.out.println("web:selectAll");
         return articleClient.selectAll();
     }
 
@@ -39,8 +38,22 @@ public class ArticleRestService {
         return articleClient.deleteArticleById(id);
     }
 
+
+
+
+
+
+
     public String addNewNotice(@RequestParam("title")String title, @RequestParam("content")String content,@RequestParam("label") String label) {
         System.out.println(title+"||"+content+"||"+label);
         return  articleClient.addNewNotice(title,content,label);
+    }
+
+    public String getNotice() {
+        return articleClient.getNotice();
+    }
+
+    public String deleteNoticeById(@RequestParam("id")int id) {
+        return articleClient.deleteNoticeById(id);
     }
 }

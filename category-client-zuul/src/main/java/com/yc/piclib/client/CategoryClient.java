@@ -20,4 +20,7 @@ public interface CategoryClient {
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/getArticleByCategoryId")
     String getArticleByCategoryId(@RequestParam("id")int id);
 
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/selectCategoryAndNum")
+    String selectCategoryAndNum();
+
 }

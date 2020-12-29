@@ -58,10 +58,34 @@ public class ArticleFuture {
         });
     }
 
+
+
+
+
+
+
+
+
+
+
     @Async
     public CompletableFuture<String> addNewNotice(@RequestParam("title")String title,@RequestParam("content") String content, @RequestParam("label")String label) {
         return CompletableFuture.supplyAsync(() -> {
             return articleRestService.addNewNotice(title,content,label);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> getNotice() {
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.getNotice();
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> deleteNoticeById(@RequestParam("id")int id) {
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.deleteNoticeById(id);
         });
     }
 }

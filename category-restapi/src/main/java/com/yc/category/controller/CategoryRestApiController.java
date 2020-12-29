@@ -36,7 +36,12 @@ public class CategoryRestApiController {
     @GetMapping("/getArticleByCategoryId")
     public String getArticleByCategoryId(@RequestParam("id")int id){
         List<Article> list = am.selectByCategoryId(id);
-        System.out.println("运行到了这里");
+        return new Gson().toJson(list);
+    }
+
+    @GetMapping("/selectCategoryAndNum")
+    public String selectCategoryAndNum(){
+        List<Category> list = cm.selectCategoryAndNum();
         return new Gson().toJson(list);
     }
 }

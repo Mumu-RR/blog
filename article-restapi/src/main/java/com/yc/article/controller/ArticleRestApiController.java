@@ -89,6 +89,9 @@ public class ArticleRestApiController {
 
 
 
+
+
+
     //Notice
     @GetMapping("/addNewNotice")
     public void addNewNotice(@RequestParam("title")String title, @RequestParam("content")String content
@@ -103,5 +106,16 @@ public class ArticleRestApiController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @GetMapping("/getNotice")
+    public String getNotice(){
+        List<Notice> noticeList = nm.selectAll();
+        return new Gson().toJson(noticeList);
+    }
+
+    @GetMapping("/deleteNoticeById")
+    public void deleteNoticeById(@RequestParam("id")int id){
+        nm.deleteNoticeById(id);
     }
 }

@@ -17,4 +17,8 @@ public class CategoryRestService {
     public String getArticleByCategoryId(@RequestParam("id")int id){
         return categoryClient.getArticleByCategoryId(id);
     }
+
+    public String selectCategoryAndNum() {
+        return categoryClient.selectCategoryAndNum();
+    }
 }

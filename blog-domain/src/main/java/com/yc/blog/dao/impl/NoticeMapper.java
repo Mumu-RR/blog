@@ -2,6 +2,7 @@ package com.yc.blog.dao.impl;
 
 import com.yc.blog.dao.MisBaseMapper;
 import com.yc.blog.entity.Notice;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +11,7 @@ public interface NoticeMapper extends MisBaseMapper<Notice> {
 
     @Insert("insert into notice values(null,#{title},#{content},now(),#{label})")
     int addNewNotice(Notice notice);
+
+    @Delete("delete from notice where id = #{id}")
+    void deleteNoticeById(int id);
 }

@@ -77,20 +77,7 @@ public class UserController {
         return  userFuture.resetPwd(account, pwd);
     }
 
-//    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
-//    public CompletableFuture<String> findAll(Integer page, Integer pageSize, String description) {
-//        return piclibFuture.findPage(page, pageSize, description);
-//    }
-//
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public CompletableFuture<String> save(@RequestBody PicDomain picDomain) throws Exception {
-//        return piclibFuture.create(picDomain);
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    public CompletableFuture<String> delete(@PathVariable Integer id) throws Exception {
-//        return piclibFuture.delete(id);
-//    }
+
 
 
 }

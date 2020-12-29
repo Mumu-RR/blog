@@ -1,11 +1,11 @@
 package com.yc.blog.dao.impl;
 
-import java.util.List;
-
 import com.yc.blog.dao.MisBaseMapper;
 import com.yc.blog.entity.Category;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 
 
@@ -22,4 +22,7 @@ public interface CategoryMapper extends MisBaseMapper<Category> {
 
 	@Select("select * from category where id = #{id} ")
 	Category selectById(int id);
+
+	@Select("select c.id,name,count(categoryId) as num from category c inner join article a on c.id=a.categoryId group by c.id;")
+	List<Category> selectCategoryAndNum();
 }

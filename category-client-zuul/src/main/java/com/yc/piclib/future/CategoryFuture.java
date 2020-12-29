@@ -27,4 +27,11 @@ public class CategoryFuture {
             return categoryRestService.getArticleByCategoryId(id);
         });
     }
+
+    @Async
+    public CompletableFuture<String>selectCategoryAndNum() {
+        return CompletableFuture.supplyAsync(() -> {
+            return categoryRestService.selectCategoryAndNum();
+        });
+    }
 }
