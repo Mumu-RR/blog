@@ -28,4 +28,10 @@ public interface CategoryClient {
 
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/deleteCategoryById")
     String deleteCategoryById(@RequestParam("id")int id);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/selectCategoryById")
+    String selectCategoryById(@RequestParam("id")int id);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/updateCategory")
+    String updateCategory(@RequestParam("id")int id,@RequestParam("name")String name,@RequestParam("introduce")String introduce);
 }

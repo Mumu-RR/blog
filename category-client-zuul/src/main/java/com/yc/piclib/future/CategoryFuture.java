@@ -48,4 +48,18 @@ public class CategoryFuture {
             return categoryRestService.deleteCategoryById(id);
         });
     }
+
+    @Async
+    public CompletableFuture<String> selectCategoryById(@RequestParam("id")int id) {
+        return CompletableFuture.supplyAsync(() -> {
+            return categoryRestService.selectCategoryById(id);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> updateCategory(@RequestParam("id")int id,@RequestParam("name")String name,@RequestParam("introduce")String introduce) {
+        return CompletableFuture.supplyAsync(() -> {
+            return categoryRestService.updateCategory(id,name,introduce);
+        });
+    }
 }

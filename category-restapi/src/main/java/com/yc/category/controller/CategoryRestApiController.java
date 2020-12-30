@@ -66,4 +66,19 @@ public class CategoryRestApiController {
     }
 
 
+    @GetMapping("selectCategoryById")
+    public String selectCategoryById(@RequestParam("id")int id){
+        Category category = cm.selectCategoryById(id);
+        return new Gson().toJson(category);
+    }
+
+    @GetMapping("updateCategory")
+    public void updateCategory(@RequestParam("id")int id,@RequestParam("name")String name,@RequestParam("introduce")String introduce){
+        System.out.println(id+"||"+name+"||"+introduce);
+        Category category = new Category();
+        category.setId(id);
+        category.setName(name);
+        category.setIntroduce(introduce);
+        cm.updataCategory(category);
+    }
 }

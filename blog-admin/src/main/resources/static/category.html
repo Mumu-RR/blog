@@ -130,7 +130,7 @@
                   <td v-text="c.id">1</td>
                   <td v-text="c.name">前端技术</td>
                   <td v-text="c.num">125</td>
-                  <td><a href="update-category.html">修改</a> <a @Click="deleteCategory(c.id)">删除</a></td>
+                  <td><a :href="'update-category.html?id='+c.id">修改</a> <a @Click="deleteCategory(c.id)">删除</a></td>
                 </tr>
               </tbody>
             </table>

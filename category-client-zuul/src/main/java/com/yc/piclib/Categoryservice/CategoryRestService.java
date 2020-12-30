@@ -29,4 +29,12 @@ public class CategoryRestService {
     public String deleteCategoryById(@RequestParam("id")int id) {
         return categoryClient.deleteCategoryById(id);
     }
+
+    public String selectCategoryById(@RequestParam("id")int id) {
+        return categoryClient.selectCategoryById(id);
+    }
+
+    public String updateCategory(@RequestParam("id")int id,@RequestParam("name")String name,@RequestParam("introduce")String introduce) {
+        return categoryClient.updateCategory(id,name,introduce);
+    }
 }

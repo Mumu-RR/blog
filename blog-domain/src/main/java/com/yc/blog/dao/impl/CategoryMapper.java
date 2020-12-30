@@ -2,10 +2,7 @@ package com.yc.blog.dao.impl;
 
 import com.yc.blog.dao.MisBaseMapper;
 import com.yc.blog.entity.Category;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public interface CategoryMapper extends MisBaseMapper<Category> {
 	List<Category> selectAll();
 
 	@Select("select * from category where id = #{id} ")
-	Category selectById(int id);
+	Category selectCategoryById(int id);
 
 	@Select("select c.id,name,count(categoryId) as num from category c inner join article a on c.id=a.categoryId group by c.id;")
 	List<Category> selectCategoryAndNum();
@@ -33,4 +30,7 @@ public interface CategoryMapper extends MisBaseMapper<Category> {
 
 	@Delete("delete from category where id = #{id}")
 	void deleteCategoryById(int id);
+
+	@Update("update category set name = #{name},introduce = #{introduce} where id = #{id}")
+    void updataCategory(Category category);
 }
