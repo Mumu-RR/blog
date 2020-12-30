@@ -21,6 +21,8 @@
         <module>article-client-zuul</module>
         <module>comment-client-zuul</module>
         <module>blog-admin</module>
+        <module>admin-client-zuul</module>
+        <module>admin-restapi</module>
     </modules>
     <groupId>com.yc.Blog</groupId>
     <artifactId>myblog</artifactId>

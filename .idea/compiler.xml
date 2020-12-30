@@ -14,13 +14,15 @@
         <module name="base-microservice-dashboard" />
         <module name="eureka-for-ha-config" />
         <module name="base-microservice-turbine" />
-        <module name="blog-web" />
+        <module name="blog-admin" />
         <module name="article-restapi" />
         <module name="base-microservice-security" />
         <module name="article-client-zuul" />
         <module name="user-restapi" />
-        <module name="blog-admin" />
+        <module name="blog-web" />
         <module name="base-microservice-config" />
+        <module name="admin-restapi" />
+        <module name="admin-client-zuul" />
         <module name="comment-restapi" />
         <module name="category-client-zuul" />
         <module name="base-microservice-zuul" />
@@ -28,6 +30,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="admin-client-zuul" target="1.8" />
+      <module name="admin-restapi" target="1.8" />
       <module name="article-client-zuul" target="1.8" />
       <module name="article-restapi" target="1.8" />
       <module name="base-microservice-config" target="1.8" />

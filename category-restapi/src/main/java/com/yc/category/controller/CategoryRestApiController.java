@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -44,4 +46,24 @@ public class CategoryRestApiController {
         List<Category> list = cm.selectCategoryAndNum();
         return new Gson().toJson(list);
     }
+
+    @GetMapping("/addCategory")
+    public void addCategory(@RequestParam("name")String name, @RequestParam("introduce")String introduce, HttpServletResponse response){
+        Category category = new Category();
+        category.setName(name);
+        category.setIntroduce(introduce);
+        cm.addCategory(category);
+        try {
+            response.sendRedirect("http://localhost:8090/category.html");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @GetMapping("deleteCategoryById")
+    public void deleteCategoryById(@RequestParam("id")int id){
+        cm.deleteCategoryById(id);
+    }
+
+
 }

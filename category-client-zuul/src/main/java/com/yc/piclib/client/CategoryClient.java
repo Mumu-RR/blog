@@ -23,4 +23,9 @@ public interface CategoryClient {
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/selectCategoryAndNum")
     String selectCategoryAndNum();
 
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/addCategory")
+    String addCategory(@RequestParam("name")String name,@RequestParam("introduce")String introduce);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/category-proxy/deleteCategoryById")
+    String deleteCategoryById(@RequestParam("id")int id);
 }

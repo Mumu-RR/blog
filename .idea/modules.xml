@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/admin-client-zuul/admin-client-zuul.iml" filepath="$PROJECT_DIR$/admin-client-zuul/admin-client-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/admin-restapi/admin-restapi.iml" filepath="$PROJECT_DIR$/admin-restapi/admin-restapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/article-client-zuul/article-client-zuul.iml" filepath="$PROJECT_DIR$/article-client-zuul/article-client-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/article-restapi/article-restapi.iml" filepath="$PROJECT_DIR$/article-restapi/article-restapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/base-microservice-config/base-microservice-config.iml" filepath="$PROJECT_DIR$/base-microservice-config/base-microservice-config.iml" />

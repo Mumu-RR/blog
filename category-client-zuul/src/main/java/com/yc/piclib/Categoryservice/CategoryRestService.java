@@ -21,4 +21,12 @@ public class CategoryRestService {
     public String selectCategoryAndNum() {
         return categoryClient.selectCategoryAndNum();
     }
+
+    public String addCategory(@RequestParam("name")String name,@RequestParam("introduce")String introduce) {
+        return categoryClient.addCategory(name,introduce);
+    }
+
+    public String deleteCategoryById(@RequestParam("id")int id) {
+        return categoryClient.deleteCategoryById(id);
+    }
 }
