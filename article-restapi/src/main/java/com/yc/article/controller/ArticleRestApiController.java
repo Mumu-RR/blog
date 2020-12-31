@@ -86,7 +86,18 @@ public class ArticleRestApiController {
     }
 
 
-
+    @RequestMapping("/updateArticle")
+    public void updateArticle(@RequestParam("id")int id,@RequestParam("title") String title,
+                                @RequestParam("content")String content,@RequestParam("label") String label,
+                                @RequestParam("categoryid")int categoryid){
+        Article article = new Article();
+        article.setId(id);
+        article.setTitle(title);
+        article.setContent(content);
+        article.setLabel(label);
+        article.setCategoryid(categoryid);
+        am.updataArticle(article);
+    }
 
 
 

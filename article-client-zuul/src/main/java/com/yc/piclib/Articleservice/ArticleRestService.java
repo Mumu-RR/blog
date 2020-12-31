@@ -56,4 +56,10 @@ public class ArticleRestService {
     public String deleteNoticeById(@RequestParam("id")int id) {
         return articleClient.deleteNoticeById(id);
     }
+
+    public String updateArticle(@RequestParam("id")int id,@RequestParam("title") String title,
+                               @RequestParam("content")String content,@RequestParam("label") String label,
+                               @RequestParam("categoryid")int categoryid) {
+        return articleClient.updateArticle(id,title,content,label,categoryid);
+    }
 }

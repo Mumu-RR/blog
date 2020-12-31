@@ -88,4 +88,13 @@ public class ArticleFuture {
             return articleRestService.deleteNoticeById(id);
         });
     }
+
+    @Async
+    public CompletableFuture<String> updateArticle(@RequestParam("id")int id,@RequestParam("title") String title,
+                                                   @RequestParam("content")String content,@RequestParam("label") String label,
+                                                   @RequestParam("categoryid")int categoryid) {
+        return CompletableFuture.supplyAsync(() -> {
+            return articleRestService.updateArticle(id,title,content,label,categoryid);
+        });
+    }
 }

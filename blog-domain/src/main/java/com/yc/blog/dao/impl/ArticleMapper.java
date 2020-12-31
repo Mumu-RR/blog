@@ -2,6 +2,7 @@ package com.yc.blog.dao.impl;
 
 import com.yc.blog.dao.MisBaseMapper;
 import com.yc.blog.entity.Article;
+import com.yc.blog.entity.Category;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -47,5 +48,6 @@ public interface ArticleMapper  extends MisBaseMapper<Article> {
 	@Delete("delete from article where id = #{id}")
 	void deleteArticleById(int id);
 
-
+	@Update("update article set title = #{title},content = #{content},label = #{label},categoryId = #{categoryid} where id = #{id}")
+	void updataArticle(Article article);
 }

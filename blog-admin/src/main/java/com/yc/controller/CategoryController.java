@@ -16,6 +16,11 @@ public class CategoryController {
     @Autowired
     private CategoryFuture categoryFuture;
 
+    @GetMapping("/category")
+    public CompletableFuture<String> findCategory() {
+        return categoryFuture.findCategory();
+    }
+
     @GetMapping("/selectCategoryAndNum")
     public CompletableFuture<String> selectCategoryAndNum() {
         return categoryFuture.selectCategoryAndNum();
