@@ -19,4 +19,10 @@ public interface CommentClient {
 
     @RequestMapping(method = RequestMethod.GET,value = "/yc-api/comment-proxy/reply.do")
     String create(@RequestParam("account")String account,@RequestParam("id")int id, @RequestParam("content")String content);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/comment-proxy/selectComment")
+    String selectComment();
+
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/comment-proxy/deleteCommentById")
+    String deleteCommentById(@RequestParam("id")int id);
 }

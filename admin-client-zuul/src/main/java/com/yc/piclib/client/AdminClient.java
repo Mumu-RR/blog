@@ -22,4 +22,6 @@ public interface AdminClient {
     String login(@RequestParam("admin") Admin admin, @RequestParam("errors") Errors errors,
                  @RequestParam("session") HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd);
 
+    @RequestMapping(method = RequestMethod.GET,value = "/yc-api/admin-proxy/doCheck")
+    String doCheck(@RequestParam("account")String account);
 }

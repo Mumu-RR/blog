@@ -4,7 +4,6 @@ import com.yc.piclib.Commentservice.CommentRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.CompletableFuture;
@@ -14,6 +13,13 @@ import java.util.concurrent.CompletableFuture;
 public class CommentFuture {
     @Autowired
     private CommentRestService commentRestService;
+
+    @Async
+    public  CompletableFuture<String> deleteCommentById(@RequestParam("id")int id) {
+        return CompletableFuture.supplyAsync(() -> {
+            return commentRestService.deleteCommentById(id);
+        });
+    }
 
     @Async
     public CompletableFuture<String> selectByArticleId(@RequestParam("id")int id) {
@@ -27,6 +33,13 @@ public class CommentFuture {
     public CompletableFuture<String> create(@RequestParam("account")String account, @RequestParam("id")int id, @RequestParam("content")String content) {
         return CompletableFuture.supplyAsync(() -> {
             return commentRestService.create(account,id,content);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> selectComment() {
+        return CompletableFuture.supplyAsync(() -> {
+            return commentRestService.selectComment();
         });
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class CommentRestApiController {
@@ -31,7 +32,6 @@ public class CommentRestApiController {
 
     @GetMapping("/reply.do")
     public String create(@RequestParam("account")String account, @RequestParam("id")int id, @RequestParam("content")String content) {
-        System.out.println("reply.do111111111");
 //        if(errors.hasErrors()) {
 //            return new Gson().toJson(new Result(0,"评论验证错误！",errors.getAllErrors()));
 //        }
@@ -42,5 +42,16 @@ public class CommentRestApiController {
         comment.setContent(content);
         cm.insert(comment);
         return new Gson().toJson(new Result(1,"评论发表成功！",comment));
+    }
+
+    @GetMapping("/selectComment")
+    public String selectComment(){
+        List<Comment> commentList = cm.selectComment();
+        return new Gson().toJson(commentList);
+    }
+
+    @GetMapping("deleteCommentById")
+    public void deleteCommentById(@RequestParam("id")int id){
+        cm.deleteCommentById(id);
     }
 }

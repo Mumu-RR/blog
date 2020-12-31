@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -26,7 +27,17 @@ public class AdminUserController {
     public CompletableFuture<String> login(@Valid Admin admin, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
         // System.out.println("web层"+user+"errors:"+errors);;
         session.setAttribute("loginedAdmin", admin);
-        System.out.println(session.getAttribute("loginedAdmin")+"这是session");
         return adminFuture.login(admin,errors,session,account,pwd);
+    }
+
+    @RequestMapping("/doCheck")
+    public CompletableFuture<String> doCheck(HttpSession session) throws IOException {
+        Admin admin=(Admin)session.getAttribute("loginedAdmin");
+//        Map<String,Object> map=new HashMap<String,Object>();
+//        map.put("admin", admin);
+//        return new Gson().toJson(map);
+        System.out.println("web:"+admin);
+        String account = admin.getAccount();
+        return adminFuture.doCheck(account);
     }
 }

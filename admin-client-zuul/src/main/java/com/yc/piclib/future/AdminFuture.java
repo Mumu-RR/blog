@@ -22,8 +22,14 @@ public class AdminFuture {
     @Async
     public CompletableFuture<String> login(Admin admin, Errors errors, HttpSession session, @RequestParam("account")String account, @RequestParam("pwd")String pwd) {
         return CompletableFuture.supplyAsync(() -> {
-            System.out.println("zuulClient"+admin+"errors:"+errors);
             return adminRestService.login(admin,errors,session,account,pwd);
+        });
+    }
+
+    @Async
+    public CompletableFuture<String> doCheck(@RequestParam("account")String account) {
+        return CompletableFuture.supplyAsync(() -> {
+            return adminRestService.doCheck(account);
         });
     }
 }

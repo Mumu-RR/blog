@@ -18,4 +18,12 @@ public class CommentRestService {
         System.out.println("client层："+id+"||"+content);
         return commentClient.create(account,id,content);
     }
+
+    public String selectComment() {
+        return commentClient.selectComment();
+    }
+
+    public String deleteCommentById(@RequestParam("id")int id) {
+        return commentClient.deleteCommentById(id);
+    }
 }

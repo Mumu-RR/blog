@@ -17,10 +17,12 @@ public class AdminRestService {
 
     public String login(@RequestParam("admin") Admin admin, @RequestParam("errors") Errors errors, @RequestParam("session") HttpSession session,
                         @RequestParam("account") String account, @RequestParam("pwd") String pwd) {
-        System.out.println(adminClient.getClass());
-        System.out.println(admin + "3333333333");
-        System.out.println(111111);
+
         return adminClient.login(admin, errors, session, account, pwd);
         }
 
+    public String doCheck(@RequestParam("account")String account) {
+        //System.out.println("zuul:"+admin);
+        return adminClient.doCheck(account);
+    }
 }

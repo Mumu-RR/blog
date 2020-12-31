@@ -44,8 +44,10 @@ public class AdminRestController {
                 //md5加密
                 admin.setPwd(MD5Utils.stringToMD5(admin.getPwd()));
                 Admin aduser =adminService.login(admin);
+                System.out.println(aduser);
                 //session.setAttribute("loginedUser", dbuser);
                // return new Result(1, "登录成功！");
+                am.Update(aduser);
                 return new Gson().toJson(new Result(1, "登录成功！"));
             } catch (BizException e) {
                 e.printStackTrace();
@@ -54,6 +56,16 @@ public class AdminRestController {
                 return new Gson().toJson(new Result(0, "业务逻辑验证错误", errors.getAllErrors()));
             }
         });
+    }
+
+    @RequestMapping("/doCheck")
+    public String doCheck(@RequestParam("account")String account){
+       // String account = admin.getAccount();
+        Admin admin = new Admin();
+        admin.setAccount(account);
+        Admin newAdmin =  am.SelectByAdminAccount(admin);
+        System.out.println("restapi:"+newAdmin);
+        return new Gson().toJson(newAdmin);
     }
 
 }

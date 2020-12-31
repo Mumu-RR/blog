@@ -25,7 +25,8 @@ public class Admin {
     @NotEmpty(message="密码不能为空!")
     @Length(min=4,max=20,message="密码必须是4~20位")
     private String pwd;
-    private Timestamp createtime;
+    private Timestamp time;
     private Integer loginNum;
+    private  Timestamp lastime;
 
 }
